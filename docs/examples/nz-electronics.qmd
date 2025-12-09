@@ -1,0 +1,15 @@
+---
+title: "Showcase with NZ electonics dataset"
+draft: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+---
+
+
+::: callout-note
+## Placeholder
+
+This page will show the application of diagnostics with NZ electronic data
+:::

@@ -1,0 +1,14 @@
+---
+title: "Showcase with Dominick's dataset"
+draft: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+---
+
+::: callout-note
+## Placeholder
+
+This page will show the application of diagnostics with Dominick's finer foods scanner data
+:::

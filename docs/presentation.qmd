@@ -1,0 +1,12 @@
+---
+title: "Multilateral Diagnostics"
+format: revealjs
+---
+
+## Motivation
+
+-   Productization left to NSOs
+
+## Overview of the approach
+
+-   Works as follows...

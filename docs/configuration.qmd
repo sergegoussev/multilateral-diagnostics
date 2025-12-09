@@ -1,0 +1,15 @@
+---
+title: "Configuration and integration into production"
+draft: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+---
+
+
+::: callout-note
+## Placeholder
+
+This page will show how demonstrated diagnostics can be integrated into production flows processing alternative data 
+:::

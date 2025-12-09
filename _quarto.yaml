@@ -1,0 +1,32 @@
+project:
+  type: website
+
+website:
+  title: "Diagnostics for multilateral price indices"
+  repo-url: https://github.com/sergegoussev/multilateral-diagnostics
+  repo-actions: [source]
+  draft-mode: visible
+  navbar:
+    background: primary
+
+    left:
+      - href: docs/paper.qmd
+        text: "Paper"
+      - href: docs/presentation.qmd
+        text: "Presentation"
+      - href: docs/configuration.qmd
+        text: "Productionizing diagnostics"
+      - text: "Examples"
+        menu:
+          - href: docs/examples/dominicks.qmd
+            text: "Dominick's dataset"
+          - href: docs/examples/nz-electronics.qmd
+            text: "NZ electronics dataset"
+    
+
+format:
+  html:
+    toc: true
+    theme: 
+      light: flatly
+      dark: darkly
