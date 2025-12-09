@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "docs/paper.html",
+    "href": "docs/paper.html",
+    "title": "A bit more than simple contributions: Developing a set of diagnostic and analytical outputs critical to support multilateral price index methods",
+    "section": "",
+    "text": "hello"
+  },
+  {
+    "objectID": "docs/presentation.html#motivation",
+    "href": "docs/presentation.html#motivation",
+    "title": "Multilateral Diagnostics",
+    "section": "Motivation",
+    "text": "Motivation\n\nProductization left to NSOs"
+  },
+  {
+    "objectID": "docs/presentation.html#overview-of-the-approach",
+    "href": "docs/presentation.html#overview-of-the-approach",
+    "title": "Multilateral Diagnostics",
+    "section": "Overview of the approach",
+    "text": "Overview of the approach\n\nWorks as follows…"
+  },
+  {
+    "objectID": "docs/examples/nz-electronics.html",
+    "href": "docs/examples/nz-electronics.html",
+    "title": "Showcase with NZ electonics dataset",
+    "section": "",
+    "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with NZ electronic data"
+  },
+  {
+    "objectID": "project-content/charter.html",
+    "href": "project-content/charter.html",
+    "title": "Project charter",
+    "section": "",
+    "text": "Project charter"
+  },
+  {
+    "objectID": "docs/examples/dominicks.html",
+    "href": "docs/examples/dominicks.html",
+    "title": "Showcase with Dominick’s dataset",
+    "section": "",
+    "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with Dominick’s finer foods scanner data"
+  },
+  {
+    "objectID": "docs/configuration.html",
+    "href": "docs/configuration.html",
+    "title": "Configuration and integration into production",
+    "section": "",
+    "text": "NotePlaceholder\n\n\n\nThis page will show how demonstrated diagnostics can be integrated into production flows processing alternative data"
+  }
+]
