@@ -18,6 +18,9 @@ format:
   pdf:
     documentclass: article
     papersize: letter
+    geometry:
+      - a4paper
+      - margin=1in
     toc: false
     number-sections: true
     colorlinks: true
@@ -25,6 +28,7 @@ format:
   html:
     toc: true
     toc-expand: 2
+    body-width: 1200px 
 ---
 
 # References {.unnumbered}
