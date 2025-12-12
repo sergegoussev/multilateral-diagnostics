@@ -1,23 +1,37 @@
 ---
-title: "A bit more than simple contributions: Developing a set of diagnostic and analytical outputs critical to support multilateral price index methods"
+title: "Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production"
+bibliography: references.bib
+subtitle: |
+  Submitted to the *19th Ottawa Group meeting*
+  *Poland, May 13-15, 2026*
 authors:
     - name: Serge Goussev 
+      affiliation: Statistics Canada
+      email: serge.goussev@statcan.gc.ca
+      orcid: 0009-0008-2359-5322
     - name: Frances Krsinich
 abstract: |  
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque libero ipsum, maximus vitae sagittis id, eleifend sed est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tempus cursus eros non pulvinar. Donec euismod nec magna vel lacinia. Maecenas ac tellus in ante sagittis mattis. Maecenas elit velit, efficitur et orci vitae, ultrices suscipit elit. Integer pulvinar imperdiet accumsan. Etiam egestas augue interdum magna auctor, aliquet commodo nisi auctor. Vestibulum vestibulum sapien a quam efficitur elementum eu eu nisl.
+  Using alternative data as a source in lower level aggregation considerably complicates the task of understanding and explaining price movements within the overall CPI. This is made even harder when the NSO applies multilateral price index methods, as data from multiple time periods is leveraged to measure price change, expanding the amount of data points and trends that must be considered. Specifically, alongside the overall price measure that could process the data as a ‘black box’, National Statistical Organizations (NSOs) need to also identify any issues with the input data that may impact the measurement (input diagnostics) and also explain the calculated index (output analytics). 
 
-  Nullam mattis fermentum dapibus. Nam viverra aliquet risus, a elementum elit elementum nec. Nullam non ante sem. Morbi nec risus sit amet elit tristique porttitor. Sed vitae lectus vitae felis tempor lobortis sed nec justo. Sed ipsum libero, commodo eget tortor id, bibendum pretium elit. Aliquam cursus, ligula in scelerisque pretium, lorem risus mollis nulla, bibendum sodales sem odio scelerisque ipsum. Vivamus tristique felis nec augue sagittis, sed imperdiet lorem aliquam.
+  This research develops and tests a set of sensible default analytic and diagnostic outputs that should play a key operational role. Specifically, it builds on earlier work on data quality testing [@guthmundsdottirs2016] and on foundational work in decomposition of both bilateral [@balk2008price] and multilateral methods [@webster2019decomposing] to outline a comprehensive set of analytical and diagnostic requirements. Dashboards to operationalize these requirements are then demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.
 format:
   pdf:
     documentclass: article
     papersize: letter
-    toc: true
+    geometry:
+      - a4paper
+      - margin=1in
+    toc: false
     number-sections: true
     colorlinks: true
 
   html:
     toc: true
     toc-expand: 2
+    body-width: 1200px 
 ---
 
-hello
+# References {.unnumbered}
+
+::: {#refs}
+:::
