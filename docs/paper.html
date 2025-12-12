@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A bit more than simple contributions: Developing a set of diagnostic and analytical outputs critical to support multilateral price index methods – Diagnostics for multilateral price indices</title>
+<title>Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production – Diagnostics for multilateral price indices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -295,29 +315,47 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/paper.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A bit more than simple contributions: Developing a set of diagnostic and analytical outputs critical to support multilateral price index methods</h1>
+<h1 class="title">Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production</h1>
+<p class="subtitle lead"></p><p>Submitted to the <em>19th Ottawa Group meeting</em> <em>Poland, May 13-15, 2026</em></p><p></p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Serge Goussev <a href="mailto:serge.goussev@statcan.gc.ca" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0008-2359-5322" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Statistics Canada
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Frances Krsinich </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p>Serge Goussev </p>
-             <p>Frances Krsinich </p>
-          </div>
-  </div>
-    
+      
   
     
   </div>
@@ -325,8 +363,8 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque libero ipsum, maximus vitae sagittis id, eleifend sed est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec tempus cursus eros non pulvinar. Donec euismod nec magna vel lacinia. Maecenas ac tellus in ante sagittis mattis. Maecenas elit velit, efficitur et orci vitae, ultrices suscipit elit. Integer pulvinar imperdiet accumsan. Etiam egestas augue interdum magna auctor, aliquet commodo nisi auctor. Vestibulum vestibulum sapien a quam efficitur elementum eu eu nisl.</p>
-    <p>Nullam mattis fermentum dapibus. Nam viverra aliquet risus, a elementum elit elementum nec. Nullam non ante sem. Morbi nec risus sit amet elit tristique porttitor. Sed vitae lectus vitae felis tempor lobortis sed nec justo. Sed ipsum libero, commodo eget tortor id, bibendum pretium elit. Aliquam cursus, ligula in scelerisque pretium, lorem risus mollis nulla, bibendum sodales sem odio scelerisque ipsum. Vivamus tristique felis nec augue sagittis, sed imperdiet lorem aliquam.</p>
+    <p>Using alternative data as a source in lower level aggregation considerably complicates the task of understanding and explaining price movements within the overall CPI. This is made even harder when the NSO applies multilateral price index methods, as data from multiple time periods is leveraged to measure price change, expanding the amount of data points and trends that must be considered. Specifically, alongside the overall price measure that could process the data as a ‘black box’, National Statistical Organizations (NSOs) need to also identify any issues with the input data that may impact the measurement (input diagnostics) and also explain the calculated index (output analytics).</p>
+    <p>This research develops and tests a set of sensible default analytic and diagnostic outputs that should play a key operational role. Specifically, it builds on earlier work on data quality testing <span class="citation" data-cites="guthmundsdottirs2016">(<a href="#ref-guthmundsdottirs2016" role="doc-biblioref">Guðmundsdóttir and Jónasdóttir 2016</a>)</span> and on foundational work in decomposition of both bilateral <span class="citation" data-cites="balk2008price">(<a href="#ref-balk2008price" role="doc-biblioref">Balk 2008</a>)</span> and multilateral methods <span class="citation" data-cites="webster2019decomposing">(<a href="#ref-webster2019decomposing" role="doc-biblioref">Webster and Tarnow-Mordi 2019</a>)</span> to outline a comprehensive set of analytical and diagnostic requirements. Dashboards to operationalize these requirements are then demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.</p>
   </div>
 </div>
 
@@ -334,9 +372,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>hello</p>
+<section id="references" class="level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-balk2008price" class="csl-entry" role="listitem">
+Balk, Bert M. 2008. <em>Price and Quantity Index Numbers: Models for Measuring Aggregate Change and Difference</em>. Cambridge University Press.
+</div>
+<div id="ref-guthmundsdottirs2016" class="csl-entry" role="listitem">
+Guðmundsdóttir, Heiðrún Erika, and Lára Guðlau Jónasdóttir. 2016. <span>“Scanner Data: Initial Data Testing.”</span> In <em>Meeting of the Group of Experts on Consumer Price Indices</em>. Geneva, Switzerland: UNECE.
+</div>
+<div id="ref-webster2019decomposing" class="csl-entry" role="listitem">
+Webster, Michael, and Rory C Tarnow-Mordi. 2019. <span>“Decomposing Multilateral Price Indexes into the Contributions of Individual Commodities.”</span> <em>Journal of Official Statistics</em> 35 (2): 461–86.
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -757,4 +808,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/paper.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/paper.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
