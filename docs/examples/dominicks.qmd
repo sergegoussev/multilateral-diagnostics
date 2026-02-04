@@ -12,3 +12,5 @@ format:
 
 This page will show the application of diagnostics with Dominick's finer foods scanner data
 :::
+
+![](/docs/images/dominiks-data-flow.drawio.svg)
