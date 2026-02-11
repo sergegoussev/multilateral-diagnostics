@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Dominicks offers us a rich real world scanner dateset (focusing on food from stores)">
 
 <title>Showcase with Dominick’s dataset – Diagnostics for multilateral price indices</title>
 <style>
@@ -20,7 +21,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -37,9 +93,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -72,6 +128,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <meta name="quarto:status" content="draft">
 
 
@@ -295,8 +360,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview-of-the-data" id="toc-overview-of-the-data" class="nav-link active" data-scroll-target="#overview-of-the-data">Overview of the data</a></li>
+  <li><a href="#example-indices" id="toc-example-indices" class="nav-link" data-scroll-target="#example-indices">Example indices</a></li>
+  <li><a href="#dominicks-specific-data-flow" id="toc-dominicks-specific-data-flow" class="nav-link" data-scroll-target="#dominicks-specific-data-flow">Dominicks specific data flow</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/examples/dominicks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -307,6 +380,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Showcase with Dominick’s dataset</h1>
 </div>
 
+<div>
+  <div class="description">
+    Dominicks offers us a rich real world scanner dateset (focusing on food from stores)
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -321,23 +399,103 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="overview-of-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-the-data">Overview of the data</h2>
+<p>The Dominick’s dataset is a rich rich and very useful dataset to leverage in validating how diagnostics and analytics can be designed with scanner data. Since it was first proposed by <span class="citation" data-cites="mehrhoff2018promoting">Mehrhoff (<a href="#ref-mehrhoff2018promoting" role="doc-biblioref">2018</a>)</span>, it has been widely used within price statistics, from analysis of multilateral methods by <span class="citation" data-cites="lamboray2021index">Lamboray (<a href="#ref-lamboray2021index" role="doc-biblioref">2021</a>)</span> to empirical tests for the decomposition of multilateral methods by <span class="citation" data-cites="webster2019decomposing">Webster and Tarnow-Mordi (<a href="#ref-webster2019decomposing" role="doc-biblioref">2019</a>)</span>. We leverage this dataset as it provides a very realistic example that NSOs would need to work with.</p>
+<p>The dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website (<span class="citation" data-cites="dominicksmanual"> (<a href="#ref-dominicksmanual" role="doc-biblioref">[2013] 2018</a>)</span>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data.</p>
+</section>
+<section id="example-indices" class="level2">
+<h2 class="anchored" data-anchor-id="example-indices">Example indices</h2>
+<p>Prior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods. <a href="#fig-bjc-ccdi-example" class="quarto-xref">Figure&nbsp;1</a> shows the Bottled Juices category over several years.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your functions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../src/dominicks_utils.R"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ird <span class="ot">&lt;-</span> <span class="fu">homogenous_product_aggregation</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">category_name=</span><span class="st">'bjc'</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">data_dir=</span><span class="st">'../../data/processed'</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">time_sample=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">group_by_parameters=</span><span class="fu">c</span>(<span class="st">'NITEM'</span>, <span class="st">'REF_PERIOD'</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">window=</span><span class="fu">list</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"start"</span> <span class="ot">=</span> <span class="st">"1990-01-01"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"end"</span>   <span class="ot">=</span> <span class="st">"1997-03-01"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>ccdi <span class="ot">&lt;-</span> <span class="fu">spliced_CCDI</span>(ird)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ccdi_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">period =</span> <span class="fu">names</span>(ccdi),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">as.numeric</span>(ccdi)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(ccdi_df, </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> <span class="sc">~</span>period, </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="sc">~</span>score, </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>               <span class="at">type =</span> <span class="st">'scatter'</span>, </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">mode =</span> <span class="st">'lines'</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>               <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Period:"</span>, period, <span class="st">"&lt;br&gt;Index:"</span>, score),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">hoverinfo =</span> <span class="st">'text'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"CCDI with mean splice (bjc category)"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Time Period"</span>, <span class="at">type =</span> <span class="st">'category'</span>), <span class="co"># Ensures order is maintained</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Index"</span>, <span class="at">tickformat =</span> <span class="st">".1%"</span>))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="fig-bjc-ccdi-example" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bjc-ccdi-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f60cf10bc5ee32630ff9" style="width:100%;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-f60cf10bc5ee32630ff9">{"x":{"visdat":{"2a6c6f8a47ec":["function () ","plotlyVisDat"]},"cur_data":"2a6c6f8a47ec","attrs":{"2a6c6f8a47ec":{"x":{},"y":{},"mode":"lines","text":{},"hoverinfo":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"CCDI with mean splice (bjc category)","xaxis":{"domain":[0,1],"automargin":true,"title":"Time Period","type":"category","categoryorder":"array","categoryarray":["","1990-02","1990-03","1990-04","1990-05","1990-06","1990-07","1990-08","1990-09","1990-10","1990-11","1990-12","1991-01","1991-02","1991-03","1991-04","1991-05","1991-06","1991-07","1991-08","1991-09","1991-10","1991-11","1991-12","1992-01","1992-02","1992-03","1992-04","1992-05","1992-06","1992-07","1992-08","1992-09","1992-10","1992-11","1992-12","1993-01","1993-02","1993-03","1993-04","1993-05","1993-06","1993-07","1993-08","1993-09","1993-10","1993-11","1993-12","1994-01","1994-02","1994-03","1994-04","1994-05","1994-06","1994-07","1994-08","1994-09","1994-10","1994-11","1994-12","1995-01","1995-02","1995-03","1995-04","1995-05","1995-06","1995-07","1995-08","1995-09","1995-10","1995-11","1995-12","1996-01","1996-02","1996-03","1996-04","1996-05","1996-06","1996-07","1996-08","1996-09","1996-10","1996-11","1996-12","1997-01","1997-02"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Index","tickformat":".1%"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["","1990-02","1990-03","1990-04","1990-05","1990-06","1990-07","1990-08","1990-09","1990-10","1990-11","1990-12","1991-01","1991-02","1991-03","1991-04","1991-05","1991-06","1991-07","1991-08","1991-09","1991-10","1991-11","1991-12","1992-01","1992-02","1992-03","1992-04","1992-05","1992-06","1992-07","1992-08","1992-09","1992-10","1992-11","1992-12","1993-01","1993-02","1993-03","1993-04","1993-05","1993-06","1993-07","1993-08","1993-09","1993-10","1993-11","1993-12","1994-01","1994-02","1994-03","1994-04","1994-05","1994-06","1994-07","1994-08","1994-09","1994-10","1994-11","1994-12","1995-01","1995-02","1995-03","1995-04","1995-05","1995-06","1995-07","1995-08","1995-09","1995-10","1995-11","1995-12","1996-01","1996-02","1996-03","1996-04","1996-05","1996-06","1996-07","1996-08","1996-09","1996-10","1996-11","1996-12","1997-01","1997-02"],"y":[1,0.94965454821283535,1.0029875443284768,1.0218262726754292,1.0148116195524106,1.0097388633189917,1.0135957158707825,1.032684241712998,1.0161327451304496,1.0388770201781261,1.0260833007911847,1.0413142810069389,1.0407914307168422,1.0365293227981329,1.0025546931716007,1.0774674892854661,1.0490871315734627,1.0286319138174309,1.085093347103081,1.083611046721189,1.0647127780501191,1.0623751032739377,1.0502420845033196,1.067519853681091,1.0810360001625772,1.1155864500927253,1.058953467772521,1.0964037778221158,1.053134162991012,1.0830554579569021,1.0830587503053555,1.102940903431004,1.0942174986883551,1.0811795209518131,1.0905865041606113,1.0758600475760354,1.0645184597832997,1.1013294039112993,1.111711462648,1.117904229503603,1.1306905475104763,1.0509424340775115,1.094894666402223,1.120769507264467,1.1344385233745946,1.1140272063010626,1.0999079184519414,1.1077231716614708,1.0542244289536851,1.0601704808327261,1.0735808645670992,1.1001188641590443,0.99700683568732229,1.019015082234487,1.1007639001809508,0.96164856231474805,1.092049630495004,0.93740678257462196,1.088242158773117,1.0552053526259422,1.0803172185795762,1.0805299169781351,1.0653123257899382,1.0683234447516785,1.073483881907777,1.079710033784347,1.1079077230675201,1.0985792653458546,1.1087692086960328,1.1047024009844026,1.1306199736448375,1.140681657290092,1.0249965754470611,1.1462614732137142,1.1416167994150455,1.1413374575839783,1.1454356272453963,1.1604983256125219,1.1285446183989432,1.13693474756998,1.1596072433746381,1.1831845285566247,1.1557197696904091,1.1989669777573411,1.1900717636371518,1.2255860402684793],"mode":"lines","text":["Period:  <br>Index: 1","Period: 1990-02 <br>Index: 0.949654548212835","Period: 1990-03 <br>Index: 1.00298754432848","Period: 1990-04 <br>Index: 1.02182627267543","Period: 1990-05 <br>Index: 1.01481161955241","Period: 1990-06 <br>Index: 1.00973886331899","Period: 1990-07 <br>Index: 1.01359571587078","Period: 1990-08 <br>Index: 1.032684241713","Period: 1990-09 <br>Index: 1.01613274513045","Period: 1990-10 <br>Index: 1.03887702017813","Period: 1990-11 <br>Index: 1.02608330079118","Period: 1990-12 <br>Index: 1.04131428100694","Period: 1991-01 <br>Index: 1.04079143071684","Period: 1991-02 <br>Index: 1.03652932279813","Period: 1991-03 <br>Index: 1.0025546931716","Period: 1991-04 <br>Index: 1.07746748928547","Period: 1991-05 <br>Index: 1.04908713157346","Period: 1991-06 <br>Index: 1.02863191381743","Period: 1991-07 <br>Index: 1.08509334710308","Period: 1991-08 <br>Index: 1.08361104672119","Period: 1991-09 <br>Index: 1.06471277805012","Period: 1991-10 <br>Index: 1.06237510327394","Period: 1991-11 <br>Index: 1.05024208450332","Period: 1991-12 <br>Index: 1.06751985368109","Period: 1992-01 <br>Index: 1.08103600016258","Period: 1992-02 <br>Index: 1.11558645009273","Period: 1992-03 <br>Index: 1.05895346777252","Period: 1992-04 <br>Index: 1.09640377782212","Period: 1992-05 <br>Index: 1.05313416299101","Period: 1992-06 <br>Index: 1.0830554579569","Period: 1992-07 <br>Index: 1.08305875030536","Period: 1992-08 <br>Index: 1.102940903431","Period: 1992-09 <br>Index: 1.09421749868836","Period: 1992-10 <br>Index: 1.08117952095181","Period: 1992-11 <br>Index: 1.09058650416061","Period: 1992-12 <br>Index: 1.07586004757604","Period: 1993-01 <br>Index: 1.0645184597833","Period: 1993-02 <br>Index: 1.1013294039113","Period: 1993-03 <br>Index: 1.111711462648","Period: 1993-04 <br>Index: 1.1179042295036","Period: 1993-05 <br>Index: 1.13069054751048","Period: 1993-06 <br>Index: 1.05094243407751","Period: 1993-07 <br>Index: 1.09489466640222","Period: 1993-08 <br>Index: 1.12076950726447","Period: 1993-09 <br>Index: 1.13443852337459","Period: 1993-10 <br>Index: 1.11402720630106","Period: 1993-11 <br>Index: 1.09990791845194","Period: 1993-12 <br>Index: 1.10772317166147","Period: 1994-01 <br>Index: 1.05422442895369","Period: 1994-02 <br>Index: 1.06017048083273","Period: 1994-03 <br>Index: 1.0735808645671","Period: 1994-04 <br>Index: 1.10011886415904","Period: 1994-05 <br>Index: 0.997006835687322","Period: 1994-06 <br>Index: 1.01901508223449","Period: 1994-07 <br>Index: 1.10076390018095","Period: 1994-08 <br>Index: 0.961648562314748","Period: 1994-09 <br>Index: 1.092049630495","Period: 1994-10 <br>Index: 0.937406782574622","Period: 1994-11 <br>Index: 1.08824215877312","Period: 1994-12 <br>Index: 1.05520535262594","Period: 1995-01 <br>Index: 1.08031721857958","Period: 1995-02 <br>Index: 1.08052991697814","Period: 1995-03 <br>Index: 1.06531232578994","Period: 1995-04 <br>Index: 1.06832344475168","Period: 1995-05 <br>Index: 1.07348388190778","Period: 1995-06 <br>Index: 1.07971003378435","Period: 1995-07 <br>Index: 1.10790772306752","Period: 1995-08 <br>Index: 1.09857926534585","Period: 1995-09 <br>Index: 1.10876920869603","Period: 1995-10 <br>Index: 1.1047024009844","Period: 1995-11 <br>Index: 1.13061997364484","Period: 1995-12 <br>Index: 1.14068165729009","Period: 1996-01 <br>Index: 1.02499657544706","Period: 1996-02 <br>Index: 1.14626147321371","Period: 1996-03 <br>Index: 1.14161679941505","Period: 1996-04 <br>Index: 1.14133745758398","Period: 1996-05 <br>Index: 1.1454356272454","Period: 1996-06 <br>Index: 1.16049832561252","Period: 1996-07 <br>Index: 1.12854461839894","Period: 1996-08 <br>Index: 1.13693474756998","Period: 1996-09 <br>Index: 1.15960724337464","Period: 1996-10 <br>Index: 1.18318452855662","Period: 1996-11 <br>Index: 1.15571976969041","Period: 1996-12 <br>Index: 1.19896697775734","Period: 1997-01 <br>Index: 1.19007176363715","Period: 1997-02 <br>Index: 1.22558604026848"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Placeholder
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bjc-ccdi-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Bottled Juices GEKS-T example
+</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>This page will show the application of diagnostics with Dominick’s finer foods scanner data</p>
+<p>Several time periods are possible to choose from this window for targeted tests.</p>
+</section>
+<section id="dominicks-specific-data-flow" class="level2">
+<h2 class="anchored" data-anchor-id="dominicks-specific-data-flow">Dominicks specific data flow</h2>
+<p>To contextualize the data flow, <a href="#fig-dominicks-data-flow" class="quarto-xref">Figure&nbsp;2</a> shows how data flows in a research sense, but also how it would flow were it to be a real dataset.</p>
+<div id="fig-dominicks-data-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dominicks-data-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../docs/images/dominicks-data-flow.svg" class="img-fluid figure-img">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dominicks-data-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Visual flow of data processing for Dominick’s as if it were a real production dataset
+</figcaption>
+</figure>
 </div>
 
 
 
-</main> <!-- /main -->
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-dominicksmanual" class="csl-entry" role="listitem">
+(2013) 2018. <em>Dominick’s Data Manual</em>. Kilts Center for Marketing.
+</div>
+<div id="ref-lamboray2021index" class="csl-entry" role="listitem">
+Lamboray, Claude. 2021. <span>“Index Compilation Techniques for Scanner Data: An Overview.”</span> <em>Group of Experts on Consumer Price Indices</em>.
+</div>
+<div id="ref-mehrhoff2018promoting" class="csl-entry" role="listitem">
+Mehrhoff, Jens. 2018. <span>“Promoting the Use of a Publically Available Scanner Data Set in Price Index Research and for Capacity Building.”</span> <em>Manuscript, European Commission, Https://Bit. Ly/2ZBUbg9</em>.
+</div>
+<div id="ref-webster2019decomposing" class="csl-entry" role="listitem">
+Webster, Michael, and Rory C Tarnow-Mordi. 2019. <span>“Decomposing Multilateral Price Indexes into the Contributions of Individual Commodities.”</span> <em>Journal of Official Statistics</em> 35 (2): 461–86.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See <a href="https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html">catalogue record</a> in the Price Statistics Open Data catalogue for more information about the dataset.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -756,4 +914,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/examples/dominicks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sergegoussev/multilateral-diagnostics/blob/main/docs/examples/dominicks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

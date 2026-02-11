@@ -39,7 +39,35 @@
     "href": "docs/examples/dominicks.html",
     "title": "Showcase with Dominick’s dataset",
     "section": "",
-    "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with Dominick’s finer foods scanner data"
+    "text": "The Dominick’s dataset is a rich rich and very useful dataset to leverage in validating how diagnostics and analytics can be designed with scanner data. Since it was first proposed by Mehrhoff (2018), it has been widely used within price statistics, from analysis of multilateral methods by Lamboray (2021) to empirical tests for the decomposition of multilateral methods by Webster and Tarnow-Mordi (2019). We leverage this dataset as it provides a very realistic example that NSOs would need to work with.\nThe dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website ( ([2013] 2018)).1 This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data."
+  },
+  {
+    "objectID": "docs/examples/dominicks.html#overview-of-the-data",
+    "href": "docs/examples/dominicks.html#overview-of-the-data",
+    "title": "Showcase with Dominick’s dataset",
+    "section": "",
+    "text": "The Dominick’s dataset is a rich rich and very useful dataset to leverage in validating how diagnostics and analytics can be designed with scanner data. Since it was first proposed by Mehrhoff (2018), it has been widely used within price statistics, from analysis of multilateral methods by Lamboray (2021) to empirical tests for the decomposition of multilateral methods by Webster and Tarnow-Mordi (2019). We leverage this dataset as it provides a very realistic example that NSOs would need to work with.\nThe dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website ( ([2013] 2018)).1 This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data."
+  },
+  {
+    "objectID": "docs/examples/dominicks.html#example-indices",
+    "href": "docs/examples/dominicks.html#example-indices",
+    "title": "Showcase with Dominick’s dataset",
+    "section": "Example indices",
+    "text": "Example indices\nPrior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods. Figure 1 shows the Bottled Juices category over several years.\n\n\nShow the code\n# Load your functions\nsource(\"../../src/dominicks_utils.R\")\n\nlibrary(plotly)\n\nird &lt;- homogenous_product_aggregation(\n        category_name='bjc',\n        data_dir='../../data/processed',\n        time_sample=c(1,2),\n        group_by_parameters=c('NITEM', 'REF_PERIOD'),\n        window=list(\n        \"start\" = \"1990-01-01\",\n        \"end\"   = \"1997-03-01\")\n    )\n\nccdi &lt;- spliced_CCDI(ird)\nccdi_df &lt;- data.frame(\n  period = names(ccdi),\n  score = as.numeric(ccdi)\n)\n\nfig &lt;- plot_ly(ccdi_df, \n               x = ~period, \n               y = ~score, \n               type = 'scatter', \n               mode = 'lines',\n               text = ~paste(\"Period:\", period, \"&lt;br&gt;Index:\", score),\n               hoverinfo = 'text') %&gt;%\n  layout(title = \"CCDI with mean splice (bjc category)\",\n         xaxis = list(title = \"Time Period\", type = 'category'), # Ensures order is maintained\n         yaxis = list(title = \"Index\", tickformat = \".1%\"))\n\nfig\n\n\n\n\n\n\n\n\nFigure 1: Bottled Juices GEKS-T example\n\n\n\n\nSeveral time periods are possible to choose from this window for targeted tests."
+  },
+  {
+    "objectID": "docs/examples/dominicks.html#dominicks-specific-data-flow",
+    "href": "docs/examples/dominicks.html#dominicks-specific-data-flow",
+    "title": "Showcase with Dominick’s dataset",
+    "section": "Dominicks specific data flow",
+    "text": "Dominicks specific data flow\nTo contextualize the data flow, Figure 2 shows how data flows in a research sense, but also how it would flow were it to be a real dataset.\n\n\n\n\n\n\nFigure 2: Visual flow of data processing for Dominick’s as if it were a real production dataset"
+  },
+  {
+    "objectID": "docs/examples/dominicks.html#footnotes",
+    "href": "docs/examples/dominicks.html#footnotes",
+    "title": "Showcase with Dominick’s dataset",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nSee catalogue record in the Price Statistics Open Data catalogue for more information about the dataset.↩︎"
   },
   {
     "objectID": "docs/configuration.html",
