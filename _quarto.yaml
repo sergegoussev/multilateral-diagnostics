@@ -1,6 +1,9 @@
 project:
   type: website
 
+execute:
+  freeze: auto
+
 website:
   title: "Diagnostics for multilateral price indices"
   repo-url: https://github.com/sergegoussev/multilateral-diagnostics
