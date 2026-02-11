@@ -58,9 +58,9 @@ fig <- plot_ly(ccdi_df,
                mode = 'lines',
                text = ~paste("Period:", period, "<br>Index:", score),
                hoverinfo = 'text') %>%
-  layout(title = "CCDI with mean splice (bjc category)",
+  layout(title = "CCDI with mean splice (Bottled Juices category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
-         yaxis = list(title = "Index", tickformat = ".1%"))
+         yaxis = list(title = "Index", tickformat = ".1"))
 
 fig
 ```
