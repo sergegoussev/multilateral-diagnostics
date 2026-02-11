@@ -1,5 +1,7 @@
 ---
 title: "Showcase with Dominick's dataset"
+description: "Dominicks offers us a rich real world scanner dateset (focusing on food from stores)"
+bibliography: ../references.bib
 draft: true
 format:
   html:
@@ -7,10 +9,66 @@ format:
     toc-expand: 2
 ---
 
-::: callout-note
-## Placeholder
+## Overview of the data
 
-This page will show the application of diagnostics with Dominick's finer foods scanner data
-:::
+The Dominick's dataset is a rich rich and very useful dataset to leverage in validating how diagnostics and analytics can be designed with scanner data. Since it was first proposed by @mehrhoff2018promoting, it has been widely used within price statistics, from analysis of multilateral methods by @lamboray2021index to empirical tests for the decomposition of multilateral methods by @webster2019decomposing. We leverage this dataset as it provides a very realistic example that NSOs would need to work with.
 
-![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg)
+The dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website (@dominicksmanual).[^1] This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data.
+
+[^1]: See [catalogue record](https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html) in the Price Statistics Open Data catalogue for more information about the dataset.
+
+## Example indices
+
+Prior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods. @fig-bjc-ccdi-example shows the Bottled Juices category over several years.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-bjc-ccdi-example
+#| fig-cap: "Bottled Juices GEKS-T example"
+
+# Load your functions
+source("../../src/dominicks_utils.R")
+
+library(plotly)
+
+ird <- homogenous_product_aggregation(
+        category_name='bjc',
+        data_dir='../../data/processed',
+        time_sample=c(1,2),
+        group_by_parameters=c('NITEM', 'REF_PERIOD'),
+        window=list(
+        "start" = "1990-01-01",
+        "end"   = "1997-03-01")
+    )
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (bjc category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1%"))
+
+fig
+```
+
+Several time periods are possible to choose from this window for targeted tests.
+
+## Dominicks specific data flow
+
+To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
+
+![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow}

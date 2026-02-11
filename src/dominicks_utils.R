@@ -1,6 +1,12 @@
-library(httr2)
+# library(httr2)
 library(arrow)
 library(glue)
+library(dplyr)
+library(gpindex)
+library(logger)
+
+# Set the log file destination
+log_appender(appender_file("operations.log"))
 
 #' Function to download movement and upc files by category and
 #' save the outputs as parquet
@@ -212,7 +218,7 @@ homogenous_product_aggregation <- function(
         SALES = sum(SALES)
     )
     message("aggregated")
-    print(head(move_monthly))
+    # print(head(move_monthly))
 
     move_monthly <- move_monthly %>%
     group_by(
