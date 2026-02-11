@@ -1,3 +1,6 @@
 # Quarto components
 /.quarto/
 /_site/
+
+*_temp.*
+*.parquet
