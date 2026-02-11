@@ -5,3 +5,5 @@ site_libs/
 
 *_temp.*
 *.parquet
+
+/.quarto/
