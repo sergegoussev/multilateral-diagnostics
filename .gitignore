@@ -1,7 +1,7 @@
 # Quarto components
 .quarto/
 _site/
-site_libs/
+/site_libs/
 
 *_temp.*
 *.parquet
