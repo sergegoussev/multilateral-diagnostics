@@ -1,9 +1,13 @@
 # library(httr2)
 library(arrow)
+library(tidyverse)
 library(glue)
 library(dplyr)
 library(gpindex)
 library(logger)
+library(jsonlite)
+library(readr)
+library(archive)
 
 # Set the log file destination
 log_appender(appender_file("operations.log"))
@@ -11,30 +15,31 @@ log_appender(appender_file("operations.log"))
 #' Function to download movement and upc files by category and
 #' save the outputs as parquet
 #' 
-#' @param category_list - list of named lists
-# category_list <- list(
-#   list(
-#     category_name = "bjc",
-#     upc_url = "...URL...",
-#     move_url = "...URL..."
-#   ),
-#   list(
-#     category_name = "bjc",
-#     upc_url = "...URL...",
-#     move_url = "...URL..."
-#   )
-# )
+#' @param category_name name of the category (full name as per Booth school website)
 #' @param output_path - local location where to save these files
 download_category <- function(category_name, output_path) {
-  # TO DO
+  #1. Read the json that stores the URLs to query
+  data <- fromJSON("https://raw.githubusercontent.com/sergegoussev/sergegoussev.github.io/main/content/blogs/datasets/dominicks/urls.json")
 
-  # NOTE: for movement, drop 2 unneeded columns - FINISH
-  # 2. Clean the dataframe
-  cols_to_remove = c("PRICE_HEX", "PROFIT_HEX") 
-  df_clean <- df %>% select(-all_of(cols_to_remove))
+  #2. Validate that the category chosen exists in the data
+  if (!(category_name %in% names(data$category_files))) {
+    stop(glue("Error: '{category_name}' is not a category in the data"))
+  }
 
-  # 3. Write that data frame to Parquet
-  write_parquet(df_clean, glue("{output_path}/{file_name}.parquet"))
+  #3. Get the product and the movement urls
+  product_url <- data$category_files[[category_name]]$products
+  movement_url <- data$category_files[[category_name]]$movement
+
+  #4. Download and save product (upc) data
+  products <- read_csv(product_url)
+  write_parquet(products, glue("{output_path}/upc{category_name}.parquet"))
+
+  #5. Download and save movement data (with long timeout as the download unzips it)
+  options(timeout = 300)
+  movement <- read_csv(archive_read(movement_url, file = 1))
+  cols_to_remove = c("PRICE_HEX", "PROFIT_HEX")
+  movement_clean <- movement %>% select(-all_of(cols_to_remove))
+  write_parquet(movement_clean, glue("{output_path}/w{category_name}.parquet"))
 }
 
 
@@ -46,7 +51,7 @@ download_category <- function(category_name, output_path) {
 download_and_process_weeks_and_stores_data <- function(save_dir) {
     #1. Process week file
     weeks <- read_csv(
-    'https://raw.githubusercontent.com/eurostat/dff/master/CSV/weeks.csv',
+    fromJSON("https://raw.githubusercontent.com/sergegoussev/sergegoussev.github.io/main/content/blogs/datasets/dominicks/urls.json")$weeks,
     col_names = c('WEEK','START','END','SPECIAL_EVENTS')
     ) %>%
     mutate(
@@ -74,7 +79,7 @@ download_and_process_weeks_and_stores_data <- function(save_dir) {
     message(glue("weeks file saved into {save_dir}"))
 
     stores <- read_csv(
-        'https://raw.githubusercontent.com/eurostat/dff/master/CSV/stores.csv',
+        fromJSON("https://raw.githubusercontent.com/sergegoussev/sergegoussev.github.io/main/content/blogs/datasets/dominicks/urls.json")$stores,
         col_names = c('STORE','CITY','PRICE_TIER','ZONE','ZIP_CODE','ADDRESS')
         ) %>%
         select(STORE,PRICE_TIER,ZONE,
