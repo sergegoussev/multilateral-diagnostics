@@ -1,33 +1,5 @@
 [
   {
-    "objectID": "docs/paper.html",
-    "href": "docs/paper.html",
-    "title": "Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production",
-    "section": "",
-    "text": "References\n\n\nBalk, Bert M. 2008. Price and Quantity Index Numbers: Models for Measuring Aggregate Change and Difference. Cambridge University Press.\n\n\nGuðmundsdóttir, Heiðrún Erika, and Lára Guðlau Jónasdóttir. 2016. “Scanner Data: Initial Data Testing.” In Meeting of the Group of Experts on Consumer Price Indices. Geneva, Switzerland: UNECE.\n\n\nWebster, Michael, and Rory C Tarnow-Mordi. 2019. “Decomposing Multilateral Price Indexes into the Contributions of Individual Commodities.” Journal of Official Statistics 35 (2): 461–86."
-  },
-  {
-    "objectID": "docs/presentation.html#motivation",
-    "href": "docs/presentation.html#motivation",
-    "title": "Multilateral Diagnostics",
-    "section": "Motivation",
-    "text": "Motivation\n\nProductization left to NSOs"
-  },
-  {
-    "objectID": "docs/presentation.html#overview-of-the-approach",
-    "href": "docs/presentation.html#overview-of-the-approach",
-    "title": "Multilateral Diagnostics",
-    "section": "Overview of the approach",
-    "text": "Overview of the approach\n\nWorks as follows…"
-  },
-  {
-    "objectID": "docs/examples/nz-electronics.html",
-    "href": "docs/examples/nz-electronics.html",
-    "title": "Showcase with NZ electonics dataset",
-    "section": "",
-    "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with NZ electronic data"
-  },
-  {
     "objectID": "project-content/charter.html",
     "href": "project-content/charter.html",
     "title": "Project charter",
@@ -70,10 +42,38 @@
     "text": "Footnotes\n\n\nSee catalogue record in the Price Statistics Open Data catalogue for more information about the dataset.↩︎"
   },
   {
+    "objectID": "docs/paper.html",
+    "href": "docs/paper.html",
+    "title": "Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production",
+    "section": "",
+    "text": "References\n\n\nBalk, Bert M. 2008. Price and Quantity Index Numbers: Models for Measuring Aggregate Change and Difference. Cambridge University Press.\n\n\nGuðmundsdóttir, Heiðrún Erika, and Lára Guðlau Jónasdóttir. 2016. “Scanner Data: Initial Data Testing.” In Meeting of the Group of Experts on Consumer Price Indices. Geneva, Switzerland: UNECE.\n\n\nWebster, Michael, and Rory C Tarnow-Mordi. 2019. “Decomposing Multilateral Price Indexes into the Contributions of Individual Commodities.” Journal of Official Statistics 35 (2): 461–86."
+  },
+  {
+    "objectID": "docs/presentation.html#motivation",
+    "href": "docs/presentation.html#motivation",
+    "title": "Multilateral Diagnostics",
+    "section": "Motivation",
+    "text": "Motivation\n\nProductization left to NSOs"
+  },
+  {
+    "objectID": "docs/presentation.html#overview-of-the-approach",
+    "href": "docs/presentation.html#overview-of-the-approach",
+    "title": "Multilateral Diagnostics",
+    "section": "Overview of the approach",
+    "text": "Overview of the approach\n\nWorks as follows…"
+  },
+  {
     "objectID": "docs/configuration.html",
     "href": "docs/configuration.html",
     "title": "Configuration and integration into production",
     "section": "",
     "text": "NotePlaceholder\n\n\n\nThis page will show how demonstrated diagnostics can be integrated into production flows processing alternative data"
+  },
+  {
+    "objectID": "docs/examples/nz-electronics.html",
+    "href": "docs/examples/nz-electronics.html",
+    "title": "Showcase with NZ electonics dataset",
+    "section": "",
+    "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with NZ electronic data"
   }
 ]

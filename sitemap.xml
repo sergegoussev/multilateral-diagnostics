@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html</loc>
-    <lastmod>2026-02-11T04:49:33.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/presentation.html</loc>
-    <lastmod>2026-02-11T04:49:33.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/nz-electronics.html</loc>
-    <lastmod>2026-02-11T04:49:33.552Z</lastmod>
-  </url>
-  <url>
     <loc>https://sergegoussev.github.io/multilateral-diagnostics/project-content/charter.html</loc>
-    <lastmod>2026-02-11T04:49:33.555Z</lastmod>
+    <lastmod>2026-03-11T03:35:20.558Z</lastmod>
   </url>
   <url>
     <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/dominicks.html</loc>
-    <lastmod>2026-02-11T04:49:33.552Z</lastmod>
+    <lastmod>2026-03-11T03:35:20.555Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html</loc>
+    <lastmod>2026-03-11T03:35:20.557Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/presentation.html</loc>
+    <lastmod>2026-03-11T03:35:20.557Z</lastmod>
   </url>
   <url>
     <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/configuration.html</loc>
-    <lastmod>2026-02-11T04:49:33.551Z</lastmod>
+    <lastmod>2026-03-11T03:35:20.554Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/nz-electronics.html</loc>
+    <lastmod>2026-03-11T03:35:20.555Z</lastmod>
   </url>
 </urlset>
