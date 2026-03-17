@@ -17,9 +17,9 @@ The dataset comes pre-categorized in separate product and movement files on the 
 
 [^1]: See [catalogue record](https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html) in the Price Statistics Open Data catalogue for more information about the dataset.
 
-## Example indices
+## Categories
 
-Prior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods.
+To simulate a real use case, lets say that we use Dominick's data for production price indices. Below, several category outputs are shown from a 'birds eye view' of the whole dataset. This is done to pick representative periods that can be selected and used for targeted analysis -- targeted to the specific time period and therefore a simulation of a normal monthly process. 
 
 ### Fabric Softener
 
