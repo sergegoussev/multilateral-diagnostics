@@ -7,3 +7,5 @@ _site/
 *.parquet
 
 /.quarto/
+.Rproj.user
+*.Rproj

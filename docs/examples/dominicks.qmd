@@ -19,7 +19,191 @@ The dataset comes pre-categorized in separate product and movement files on the 
 
 ## Example indices
 
-Prior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods. @fig-bjc-ccdi-example shows the Bottled Juices category over several years.
+Prior to jumping into specific time periods to trial and showcase how various diagnostic dashboards work, an overall index is useful to select these specific time periods.
+
+### Fabric Softener
+
+@fig-fsf-ccdi-example shows the Fabric Softeners category over several years.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-fsf-ccdi-example
+#| fig-cap: "Fabric Softeners GEKS-T example"
+
+# Load your functions
+source("../../src/dominicks_utils.R")
+
+library(plotly)
+
+ird <- homogenous_product_aggregation(
+        category_name='fsf',
+        data_dir='../../data/processed',
+        time_sample=c(1,2),
+        group_by_parameters=c('NITEM', 'REF_PERIOD'),
+        window=list(
+        "start" = "1990-01-01",
+        "end"   = "1997-04-01")
+    )
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Fabric Softeners category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1"))
+
+fig
+```
+
+### Beer
+
+
+@fig-ber-ccdi-example shows the Beer category over several years.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-ber-ccdi-example
+#| fig-cap: "Beer GEKS-T example"
+
+ird <- homogenous_product_aggregation(
+        category_name='ber',
+        data_dir='../../data/processed',
+        time_sample=c(1,2),
+        group_by_parameters=c('NITEM', 'REF_PERIOD'),
+        window=list(
+        "start" = "1990-01-01",
+        "end"   = "1997-04-01")
+    )
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Beer category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1"))
+
+fig
+```
+### Analgetics
+
+
+@fig-ana-ccdi-example shows the Analgetics category over several years.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-ana-ccdi-example
+#| fig-cap: "Analgetics GEKS-T example"
+
+ird <- homogenous_product_aggregation(
+        category_name='ana',
+        data_dir='../../data/processed',
+        time_sample=c(1,2),
+        group_by_parameters=c('NITEM', 'REF_PERIOD'),
+        window=list(
+        "start" = "1990-01-01",
+        "end"   = "1997-04-01")
+    )
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Analgetics category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1"))
+
+fig
+```
+
+### Cookies
+
+
+@fig-coo-ccdi-example shows the Cookies category over several years.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-coo-ccdi-example
+#| fig-cap: "Cookies GEKS-T example"
+
+ird <- homogenous_product_aggregation(
+        category_name='coo',
+        data_dir='../../data/processed',
+        time_sample=c(1,2),
+        group_by_parameters=c('NITEM', 'REF_PERIOD'),
+        window=list(
+        "start" = "1990-01-01",
+        "end"   = "1997-04-01")
+    )
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Cookies category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1"))
+
+fig
+```
+
+### Bottled Juices
+
+
+@fig-bjc-ccdi-example shows the Bottled Juices category over several years.
 
 ```{r}
 #| code-fold: true
@@ -30,11 +214,6 @@ Prior to jumping into specific time periods to trial and showcase how various di
 #| label: fig-bjc-ccdi-example
 #| fig-cap: "Bottled Juices GEKS-T example"
 
-# Load your functions
-source("../../src/dominicks_utils.R")
-
-library(plotly)
-
 ird <- homogenous_product_aggregation(
         category_name='bjc',
         data_dir='../../data/processed',
@@ -42,7 +221,7 @@ ird <- homogenous_product_aggregation(
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
         "start" = "1990-01-01",
-        "end"   = "1997-03-01")
+        "end"   = "1997-04-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -64,8 +243,6 @@ fig <- plot_ly(ccdi_df,
 
 fig
 ```
-
-Several time periods are possible to choose from this window for targeted tests.
 
 ## Dominicks specific data flow
 
