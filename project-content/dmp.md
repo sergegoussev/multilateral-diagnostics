@@ -24,7 +24,8 @@ Input data for the project will be stored in the `data/raw/` (raw version) or `d
 
 ```         
 ├── data                    # Placeholder folders for the data
-│   ├── raw                 # For raw open data
+│   ├── raw                 # For raw data
+│   ├── processed           # For semi-processeddata
 │   └── clean               # For cleaned datasets that can be used for downstream analysis
 ```
 
