@@ -13,3 +13,5 @@ format:
 
 This page will show how demonstrated diagnostics can be integrated into production flows processing alternative data 
 :::
+
+![Overall data flow](/docs/images/data-flow-general.png)

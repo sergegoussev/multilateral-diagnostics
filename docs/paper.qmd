@@ -31,7 +31,12 @@ format:
     body-width: 1200px 
 ---
 
+
+![Overall data flow](/docs/images/data-flow-general.png){#fig-overall-data-flow}
+
 # References {.unnumbered}
 
 ::: {#refs}
 :::
+
+
