@@ -1,88 +1,34 @@
 # import::from("src/dominicks_utils.R", download_category)
-source("src/dominicks_utils.R")
+source("R/dominicks_utils.R")
 
 #1. Download the data for each category
+categories <- c("ber", "ana", "fsf", "fec", "coo", "bjc", "lnd", "frj", "tna", "oat", "tbr")
 
-#Beer
-download_category(
-  category_name = "ber",
-  output_path = "data/raw"
-)
+for (category in categories) {
+  print(paste("Downloading ", category))
+  tryCatch({
+    download_category(
+      category_name = category,
+      output_path = "data/raw"
+    )
+  }, error = function(e) {
+    # Note the skip in the category
+    message("Skipped ", category, ": ", e$message)
+  })
+}
 
-#Analgetics
-download_category(
-  category_name = "ana",
-  output_path = "data/raw"
-)
-
-#Fabric Softeners
-download_category(
-  category_name = "fsf",
-  output_path = "data/raw"
-)
-
-#Front-end-candies
-download_category(
-  category_name = "fec",
-  output_path = "data/raw"
-)
-
-#Cookies
-download_category(
-  category_name = "coo",
-  output_path = "data/raw"
-)
-
-#Bottled Juices
-download_category(
-  category_name = "bjc",
-  output_path = "data/raw"
-)
-
-# Download weeks and stores
+#2. Download weeks and stores
 download_and_process_weeks_and_stores_data(
     save_dir = "data/raw"
 )
 
-#2. Process the data for each category
-preprocess_category_data(
-    category_name = "ber",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
-
-preprocess_category_data(
-    category_name = "ana",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
-
-preprocess_category_data(
-    category_name = "fsf",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
-
-preprocess_category_data(
-    category_name = "fec",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
-
-preprocess_category_data(
-    category_name = "coo",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
-
-preprocess_category_data(
-    category_name = "bjc",
-    data_dir = "data/raw",
-    save = TRUE,
-    output_dir = "data/processed"
-)
+#3. Process the data for each category
+for (category in categories) {
+  print(paste("Processing ", category))
+  preprocess_category_data(
+      category_name = category,
+      data_dir = "data/raw",
+      save = TRUE,
+      output_dir = "data/processed"
+  )
+}

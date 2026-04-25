@@ -20,13 +20,19 @@ download_category <- function(category_name, output_path) {
   data <- fromJSON("https://raw.githubusercontent.com/sergegoussev/sergegoussev.github.io/main/content/blogs/datasets/dominicks/urls.json")
 
   #2. Validate that the category chosen exists in the data
-  if (!(category_name %in% names(data$category_files))) {
+  if (!(category_name %in% names(data$category_dictionary))) {
     stop(glue("Error: '{category_name}' is not a category in the data"))
+  }
+  
+  #Skip the step if this file has already been saved
+  if (file.exists(glue("{output_path}/upc{category_name}.parquet")) == TRUE) {
+    stop("This category already exists") # This is like Python's 'raise Exception'
   }
 
   #3. Get the product and the movement urls
-  product_url <- data$category_files[[category_name]]$products
-  movement_url <- data$category_files[[category_name]]$movement
+  CATEGORY_SHORT <- category_name
+  product_url <- glue(data$category_files$URL, data$category_files$product_URL)
+  movement_url <- glue(data$category_files$URL, data$category_files$movement_URL)
 
   #4. Download and save product (upc) data
   products <- read_csv(product_url)
@@ -36,7 +42,7 @@ download_category <- function(category_name, output_path) {
   temp_zip <- tempfile(fileext = ".zip")
   temp_dir <- tempfile()
   dir.create(temp_dir)
-  
+  options(timeout = 300)
   download.file(movement_url, temp_zip, mode = "wb", quiet = TRUE)
   unzipped_file <- unzip(temp_zip, exdir = temp_dir)[1]
   
