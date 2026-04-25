@@ -3,11 +3,9 @@ library(arrow)
 library(tidyverse)
 library(glue)
 library(dplyr)
-library(gpindex)
 library(logger)
 library(jsonlite)
 library(readr)
-library(archive)
 
 # Set the log file destination
 log_appender(appender_file("operations.log"))
@@ -22,24 +20,40 @@ download_category <- function(category_name, output_path) {
   data <- fromJSON("https://raw.githubusercontent.com/sergegoussev/sergegoussev.github.io/main/content/blogs/datasets/dominicks/urls.json")
 
   #2. Validate that the category chosen exists in the data
-  if (!(category_name %in% names(data$category_files))) {
+  if (!(category_name %in% names(data$category_dictionary))) {
     stop(glue("Error: '{category_name}' is not a category in the data"))
+  }
+  
+  #Skip the step if this file has already been saved
+  if (file.exists(glue("{output_path}/upc{category_name}.parquet")) == TRUE) {
+    stop("This category already exists") # This is like Python's 'raise Exception'
   }
 
   #3. Get the product and the movement urls
-  product_url <- data$category_files[[category_name]]$products
-  movement_url <- data$category_files[[category_name]]$movement
+  CATEGORY_SHORT <- category_name
+  product_url <- glue(data$category_files$URL, data$category_files$product_URL)
+  movement_url <- glue(data$category_files$URL, data$category_files$movement_URL)
 
   #4. Download and save product (upc) data
   products <- read_csv(product_url)
   write_parquet(products, glue("{output_path}/upc{category_name}.parquet"))
-
-  #5. Download and save movement data (with long timeout as the download unzips it)
+  
+  # 5. Download to a temporary file, unzip, and read using arrow for better performance
+  temp_zip <- tempfile(fileext = ".zip")
+  temp_dir <- tempfile()
+  dir.create(temp_dir)
   options(timeout = 300)
-  movement <- read_csv(archive_read(movement_url, file = 1))
+  download.file(movement_url, temp_zip, mode = "wb", quiet = TRUE)
+  unzipped_file <- unzip(temp_zip, exdir = temp_dir)[1]
+  
+  movement <- read_csv_arrow(unzipped_file)
   cols_to_remove = c("PRICE_HEX", "PROFIT_HEX")
   movement_clean <- movement %>% select(-all_of(cols_to_remove))
   write_parquet(movement_clean, glue("{output_path}/w{category_name}.parquet"))
+
+  # Clean up temporary files
+  unlink(temp_zip)
+  unlink(temp_dir, recursive = TRUE)
 }
 
 
@@ -173,39 +187,100 @@ preprocess_category_data <- function(category_name, data_dir, save=FALSE, output
 }
 
 
+# #' Function to do aggregation across time, outlets, and item codes. This first
+# #' and critical step in any multilateral methods is key to define the 
+# #' homogeneous prodcuts. The output of this step thus serves as the input for 
+# #' elementary price index aggregation.
+# #' 
+# #' @param category_name name of the category of interest
+# #' @param data_dir directory where the preprocessed cateogry data resides
+# #' 
+# #' @param time_sample that will be used within the month (e.g. c(1,2) will 
+# #' mean that weeks 1 and 2 will be used from each month's data)
+# #' @param group_by_parameters list the categories that are used to differentiate
+# #' homogenous products, e.g. (COM_CODE, NITEM, STORE) will aggregate across
+# #' NITEM code in each category, i.e. STOREs will be ignored.
+# #' @param window dictionary that specifies the start and end of the months 
+# #' that are extracted from the input data window['start'] = '1990-01-01' and 
+# #' window['end'] = '1992-01-01' will pull 25 months of data
+# #'  
+# #' @param save TRUE/FALSE whether to save the output dataframe
+# #' @param output_dir where to save the output dataframe
+# #' 
+# #' @output homogeneous product dataframe
+# homogenous_product_aggregation <- function(
+#     category_name,
+#     data_dir,
+#     time_sample,
+#     group_by_parameters,
+#     window,
+#     save = FALSE,
+#     output_dir = NA
+# ) {
+#     move = read_parquet(glue("{data_dir}/processed_{category_name}.parquet"))
+#     message("data read into memory")
+#     move_monthly <- move %>%
+#     filter(
+#         between(
+#         START,
+#         as.Date(window$start),
+#         as.Date(window$end)
+#         )
+#     ) %>%
+#     filter(
+#         WEEK_OF_MONTH %in% time_sample # Filter for specific weeks within the month
+#     ) %>%
+#     group_by(across(all_of(group_by_parameters))
+#     ) %>%
+#     summarise(
+#         MOVE = sum(MOVE),
+#         SALES = sum(SALES)
+#     )
+#     message("aggregated")
+#     # print(head(move_monthly))
+
+#     move_monthly <- move_monthly %>%
+#     group_by(
+#         REF_PERIOD
+#     ) %>%
+#     mutate(
+#         PRICE = SALES / MOVE,
+#         SHARE = SALES / sum(SALES)
+#     ) %>%
+#     ungroup()
+#     message("unit prices and sale proporitions calculated")
+#     #TODO: drop unecessary columns, return and save data frame
+#     if (save) {
+#         write_parquet(move_monthly, glue("{output_dir}/ird_{category_name}.parquet"))
+#     }
+#     return(move_monthly)
+# }
+
+
+
 #' Function to do aggregation across time, outlets, and item codes. This first
 #' and critical step in any multilateral methods is key to define the 
 #' homogeneous prodcuts. The output of this step thus serves as the input for 
 #' elementary price index aggregation.
 #' 
-#' @param category_name name of the category of interest
-#' @param data_dir directory where the preprocessed cateogry data resides
-#' 
 #' @param time_sample that will be used within the month (e.g. c(1,2) will 
-#' mean that weeks 1 and 2 will be used from each month's data)
+#'  mean that weeks 1 and 2 will be used from each month's data)
 #' @param group_by_parameters list the categories that are used to differentiate
-#' homogenous products, e.g. (COM_CODE, NITEM, STORE) will aggregate across
-#' NITEM code in each category, i.e. STOREs will be ignored.
+#'  homogenous products, e.g. (COM_CODE, NITEM, STORE) will aggregate across
+#'  NITEM code in each category, i.e. STOREs will be ignored.
 #' @param window dictionary that specifies the start and end of the months 
-#' that are extracted from the input data window['start'] = '1990-01-01' and 
-#' window['end'] = '1992-01-01' will pull 25 months of data
+#'  that are extracted from the input data window['start'] = '1990-01-01' and 
+#'  window['end'] = '1992-01-01' will pull 25 months of data
 #'  
-#' @param save TRUE/FALSE whether to save the output dataframe
-#' @param output_dir where to save the output dataframe
+
 #' 
 #' @output homogeneous product dataframe
-homogenous_product_aggregation <- function(
-    category_name,
-    data_dir,
-    time_sample,
-    group_by_parameters,
-    window,
-    save = FALSE,
-    output_dir = NA
-) {
-    move = read_parquet(glue("{data_dir}/processed_{category_name}.parquet"))
-    message("data read into memory")
-    move_monthly <- move %>%
+#' 
+#' 
+# Core logic (Pure function - easy to test, no disk I/O required)
+aggregate_homogenous_products <- function(move_data, time_sample, group_by_parameters, window) {
+
+    move_monthly <- move_data %>%
     filter(
         between(
         START,
@@ -235,31 +310,32 @@ homogenous_product_aggregation <- function(
     ) %>%
     ungroup()
     message("unit prices and sale proporitions calculated")
-    #TODO: drop unecessary columns, return and save data frame
-    if (save) {
-        write_parquet(move_monthly, glue("{output_dir}/ird_{category_name}.parquet"))
-    }
+    
     return(move_monthly)
 }
 
-#' Function to return a spliced GEKS-T (i.e. CCDI)
+#' Wrapper function to do IO and to call aggregate_homogenous_products()
+#'
+#' @param category_name name of the category of interest
+#' @param data_dir directory where the preprocessed cateogry data resides
+#' @param save TRUE/FALSE whether to save the output dataframe
+#' @param output_dir where to save the output dataframe
 #' 
-#' @param ird is index ready data outputted homogenous_product_aggregation()
-#' 
-#' @return full_index 
-spliced_CCDI <- function(ird) {
-    # do a count of the numbef of periods
-    all_periods <- unique(ird$REF_PERIOD)
-    message("Calculating geks for ", length(all_periods), " periods")
-    # print(all_periods)  
-
-    # return the list of GEKS-T's for each time window
-    tg <- with(ird, tornqvist_geks(PRICE, MOVE, REF_PERIOD, NITEM, window=25, na.rm = TRUE))
-    message(head(tg))
-
-    # do a mean splice on published to get a final index
-    spliced_tg <- splice_index(tg, published=TRUE)
-    # print("Spliced GEKS-Tornqvist index:")
-    full_index <- c(1, spliced_tg)
-    return(full_index)
+#' Other params (time_sample, group_by_parameters, window) are passed 
+#'  through to aggregate_homogenous_products()
+process_and_save_aggregation <- function(
+    category_name,
+    data_dir,
+    time_sample,
+    group_by_parameters,
+    window,
+    save = FALSE,
+    output_dir = NA
+    ) {
+    df <- read_parquet(glue("{data_dir}/processed_{category_name}.parquet"))
+    result <- aggregate_homogenous_products(df, time_sample, group_by_parameters, window)
+    if (save) {
+        write_parquet(result, glue("{output_dir}/ird_{category_name}.parquet"))
+    }
+    return(result)
 }

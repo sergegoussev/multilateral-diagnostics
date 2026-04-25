@@ -45,8 +45,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-01-01",
-        "end"   = "1997-04-01")
+        "start" = "1990-12-01",
+        "end"   = "1997-05-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -89,8 +89,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-01-01",
-        "end"   = "1997-04-01")
+        "start" = "1990-12-01",
+        "end"   = "1997-05-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -132,8 +132,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-01-01",
-        "end"   = "1997-04-01")
+        "start" = "1990-12-01",
+        "end"   = "1997-05-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -176,8 +176,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-01-01",
-        "end"   = "1997-04-01")
+        "start" = "1990-12-01",
+        "end"   = "1997-05-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -220,8 +220,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-01-01",
-        "end"   = "1997-04-01")
+        "start" = "1990-12-01",
+        "end"   = "1997-05-01")
     )
 
 ccdi <- spliced_CCDI(ird)

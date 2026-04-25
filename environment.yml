@@ -1,0 +1,26 @@
+name: multilateral-diagnostics
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+
+  # R packages
+  - r-base=4.5.2
+  - r-tidyverse=2.0.0
+  - r-irkernel
+  - r-essentials
+  - r-glue=1.8.0
+  - r-logger=0.4.1
+  - r-jsonlite=2.0.0
+  - r-readr=2.1.5
+  - r-dplyr=1.1.4
+  - r-plotly=4.11.0
+  - r-arrow
+  - r-DT
+  - r-gpindex=0.6.3
+
+  # Other tools
+  - mamba
