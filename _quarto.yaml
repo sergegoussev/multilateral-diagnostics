@@ -15,8 +15,8 @@ website:
     left:
       - href: docs/paper.qmd
         text: "Paper"
-      - href: docs/presentation.qmd
-        text: "Presentation"
+      - href: docs/poster.pdf
+        text: "Poster"
       - href: docs/configuration.qmd
         text: "Productionizing diagnostics"
       - text: "Examples"
