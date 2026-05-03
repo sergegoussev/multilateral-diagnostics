@@ -2,6 +2,17 @@
 title: "Showcase with Dominick's dataset"
 description: "Dominicks offers us a rich real world scanner dateset (focusing on food from stores)"
 bibliography: ../references.bib
+listing:
+  id: tech-topic-series
+  contents: 
+    - "dashboards"
+  sort: "title"
+  type: default
+  categories: true
+  fields: [title, subtitle, categories]
+  include:
+    keywords: ["Dominicks"]
+
 draft: true
 format:
   html:
@@ -45,8 +56,8 @@ ird <- homogenous_product_aggregation(
         time_sample=c(1,2),
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
+        "start" = "1990-01-01",
+        "end"   = "1997-04-01")
     )
 
 ccdi <- spliced_CCDI(ird)
@@ -249,3 +260,5 @@ fig
 To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
 
 ![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow}
+
+

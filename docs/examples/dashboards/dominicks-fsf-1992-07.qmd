@@ -1,0 +1,29 @@
+---
+title: "1992-07 Dashboard"
+subtitle: "Monthly Dashboard for Fabric Softener sold at Dominick's: July 1992"
+draft: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+
+categories:
+  - Dominicks
+  - Fabric Softener
+  - 1992-07
+  - GEKS
+---
+
+# Overview
+
+
+# Diagnostics
+
+## Analytical (output) diagnostics
+
+
+
+## Input diagnostics
+
+
+## Monitoring / data validation
