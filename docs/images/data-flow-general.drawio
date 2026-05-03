@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Overall" id="07h-mFTpo6vSKjVGX5d8">
-    <mxGraphModel dx="2430" dy="2063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2405" dy="2063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -437,20 +437,25 @@
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-23" parent="1" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=19;image=img/lib/azure2/other/Azure_Monitor_Dashboard.svg;sketch=1;curveFitting=1;jiggle=2;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;shadow=0;labelBackgroundColor=none;" value="&lt;font&gt;Analytical&amp;nbsp;&lt;br&gt;(output)&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font&gt;diagnostics&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="90" width="96.84" x="850" y="-172" as="geometry" />
         </mxCell>
-        <mxCell id="4FWUtxg9mFoRJEfkXJh7-30" edge="1" parent="1" source="4FWUtxg9mFoRJEfkXJh7-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;dashed=1;sketch=1;curveFitting=1;jiggle=2;startArrow=classic;startFill=1;endArrow=none;endFill=0;shadow=0;" target="hK1q15rpV1HvF6FYQfKe-156">
+        <mxCell id="4FWUtxg9mFoRJEfkXJh7-30" edge="1" parent="1" source="4FWUtxg9mFoRJEfkXJh7-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;dashed=1;sketch=1;curveFitting=1;jiggle=2;startArrow=classic;startFill=1;endArrow=none;endFill=0;shadow=0;exitX=0.497;exitY=0.99;exitDx=0;exitDy=0;exitPerimeter=0;" target="hK1q15rpV1HvF6FYQfKe-156">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-31" edge="1" parent="1" source="4FWUtxg9mFoRJEfkXJh7-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;dashed=1;sketch=1;curveFitting=1;jiggle=2;startArrow=classic;startFill=1;endArrow=none;endFill=0;shadow=0;" target="2NYs-vWxs33-I3ny5vZj-25">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-24" parent="1" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=19;image=img/lib/azure2/other/Azure_Monitor_Dashboard.svg;sketch=1;curveFitting=1;jiggle=2;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;shadow=0;labelBackgroundColor=none;" value="&lt;font&gt;Input diagnostics&lt;/font&gt;" vertex="1">
-          <mxGeometry height="90" width="96.84" x="419.99999999999994" y="-170" as="geometry" />
+          <mxGeometry height="90" width="96.84" x="499.99999999999994" y="-172" as="geometry" />
         </mxCell>
-        <mxCell id="4FWUtxg9mFoRJEfkXJh7-29" edge="1" parent="1" source="4FWUtxg9mFoRJEfkXJh7-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;dashed=1;sketch=1;curveFitting=1;jiggle=2;startArrow=classic;startFill=1;endArrow=none;endFill=0;shadow=0;" target="19">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="4FWUtxg9mFoRJEfkXJh7-29" edge="1" parent="1" source="4FWUtxg9mFoRJEfkXJh7-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;dashed=1;sketch=1;curveFitting=1;jiggle=2;startArrow=classic;startFill=1;endArrow=none;endFill=0;shadow=0;exitX=0.5;exitY=1.022;exitDx=0;exitDy=0;exitPerimeter=0;" target="19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="158" y="-40" />
+              <mxPoint x="34" y="-40" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-28" parent="1" style="image;aspect=fixed;html=1;points=[];align=left;fontSize=19;image=img/lib/azure2/other/Azure_Monitor_Dashboard.svg;sketch=1;curveFitting=1;jiggle=2;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;shadow=0;labelBackgroundColor=none;" value="&lt;font&gt;Monitoring /&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font&gt;validation&amp;nbsp;&lt;/font&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="96.84" x="43.15999999999997" y="-181" as="geometry" />
+          <mxGeometry height="90" width="96.84" x="109.99999999999997" y="-172" as="geometry" />
         </mxCell>
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-33" edge="1" parent="1" source="6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;sketch=1;curveFitting=1;jiggle=2;shadow=0;" target="2">
           <mxGeometry relative="1" as="geometry" />
@@ -459,7 +464,7 @@
           <mxGeometry height="50" relative="1" width="50" y="-30" as="geometry">
             <mxPoint as="offset" />
             <mxPoint x="910" y="-224" as="sourcePoint" />
-            <mxPoint x="80" y="-224" as="targetPoint" />
+            <mxPoint x="130" y="-224" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="4FWUtxg9mFoRJEfkXJh7-35" edge="1" parent="1" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=19;fillColor=#e1d5e7;strokeColor=#9673a6;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="Data processing flow">
