@@ -36,7 +36,10 @@ download_category <- function(category_name, output_path) {
   movement_url_alt <- glue(data$category_files$URL, data$category_files$movement_URL_alt)
 
   #4. Download and save product (upc) data
-  products <- read_csv(product_url)
+  products <- read_csv(
+    product_url,
+    col_types = schema(UPC = float64())
+    )
   write_parquet(products, glue("{output_path}/upc{category_name}.parquet"))
   
   # 5. Download to a temporary file, unzip, and read using arrow for better performance
@@ -54,7 +57,10 @@ download_category <- function(category_name, output_path) {
   download.file(final_url, temp_zip, mode = "wb", quiet = TRUE)
   unzipped_file <- unzip(temp_zip, exdir = temp_dir)[1]
   
-  movement <- read_csv_arrow(unzipped_file)
+  movement <- read_csv_arrow(
+    unzipped_file,
+    col_types = schema(UPC = float64())
+    )
   cols_to_remove = c("PRICE_HEX", "PROFIT_HEX")
   movement_clean <- movement %>% select(-all_of(cols_to_remove))
   write_parquet(movement_clean, glue("{output_path}/w{category_name}.parquet"))

@@ -53,7 +53,7 @@ library(plotly)
 ird <- homogenous_product_aggregation(
         category_name='fsf',
         data_dir='../../data/processed',
-        time_sample=c(1,2),
+        time_sample=NULL,
         group_by_parameters=c('NITEM', 'REF_PERIOD'),
         window=list(
         "start" = "1990-01-01",
