@@ -33,6 +33,7 @@ download_category <- function(category_name, output_path) {
   CATEGORY_SHORT <- category_name
   product_url <- glue(data$category_files$URL, data$category_files$product_URL)
   movement_url <- glue(data$category_files$URL, data$category_files$movement_URL)
+  movement_url_alt <- glue(data$category_files$URL, data$category_files$movement_URL_alt)
 
   #4. Download and save product (upc) data
   products <- read_csv(product_url)
@@ -43,7 +44,14 @@ download_category <- function(category_name, output_path) {
   temp_dir <- tempfile()
   dir.create(temp_dir)
   options(timeout = 300)
-  download.file(movement_url, temp_zip, mode = "wb", quiet = TRUE)
+  response <- HEAD(movement_url)
+  if (status_code(response) == 404) {
+    message("404 Found. Using alternative URL.")
+    final_url <- movement_url_alt
+    } else {
+        final_url <- movement_url
+    }
+  download.file(final_url, temp_zip, mode = "wb", quiet = TRUE)
   unzipped_file <- unzip(temp_zip, exdir = temp_dir)[1]
   
   movement <- read_csv_arrow(unzipped_file)
@@ -71,7 +79,7 @@ download_and_process_weeks_and_stores_data <- function(save_dir) {
     mutate(
         START = as.Date(START,format = '%m/%d/%y'), #convert to date format
         END = as.Date(END,format = '%m/%d/%y'),     #convert to date format
-        REF_PERIOD = paste(format(END, '%Y'),format(END, '%m'),sep = '-'), #reference period as string
+        REF_PERIOD = paste(format(START, '%Y'),format(START, '%m'),sep = '-'), #reference period as string using the start of the week
         WEEK_FULLY_IN_MONTH = ifelse(months(START) == months(END),TRUE,NA),#return NA if the week straddles months
     ) %>% #create a count of the week that is cleanly within the month
     group_by(REF_PERIOD) %>%
@@ -289,7 +297,7 @@ aggregate_homogenous_products <- function(move_data, time_sample, group_by_param
         )
     ) %>%
     filter(
-        WEEK_OF_MONTH %in% time_sample # Filter for specific weeks within the month
+        is.null(time_sample) | WEEK_OF_MONTH %in% time_sample # Filter for specific weeks within the month unless a NULL is sent
     ) %>%
     group_by(across(all_of(group_by_parameters))
     ) %>%
@@ -310,7 +318,7 @@ aggregate_homogenous_products <- function(move_data, time_sample, group_by_param
     ) %>%
     ungroup()
     message("unit prices and sale proporitions calculated")
-    
+
     return(move_monthly)
 }
 
@@ -335,7 +343,9 @@ process_and_save_aggregation <- function(
     df <- read_parquet(glue("{data_dir}/processed_{category_name}.parquet"))
     result <- aggregate_homogenous_products(df, time_sample, group_by_parameters, window)
     if (save) {
-        write_parquet(result, glue("{output_dir}/ird_{category_name}.parquet"))
+        write_parquet(result, glue(
+            "{output_dir}/ird_{category_name}_timesamp_{glue_collapse(time_sample %||% 'NULL', sep = '-')}_groupby_{glue_collapse(group_by_parameters, sep = '-')}.parquet"
+            ))
     }
     return(result)
 }
