@@ -6,6 +6,7 @@ library(dplyr)
 library(logger)
 library(jsonlite)
 library(readr)
+library(httr)
 
 # Set the log file destination
 log_appender(appender_file("operations.log"))
@@ -36,7 +37,7 @@ download_category <- function(category_name, output_path) {
   movement_url_alt <- glue(data$category_files$URL, data$category_files$movement_URL_alt)
 
   #4. Download and save product (upc) data
-  products <- read_csv(
+  products <- read_csv_arrow(
     product_url,
     col_types = schema(UPC = float64())
     )
