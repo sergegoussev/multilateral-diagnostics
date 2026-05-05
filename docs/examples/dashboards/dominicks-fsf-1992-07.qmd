@@ -16,6 +16,43 @@ categories:
 
 # Overview
 
+```{r}
+library(dplyr)
+library(DT)
+library(arrow)
+
+period <- "1992-07"
+
+ccdi_df <- read_parquet("../../../output/fsf_ccdi.parquet")
+
+ccdi_df <- ccdi_df %>%
+  arrange(period) %>% # Ensure data is ordered chronologically first
+  mutate(
+    mom_ratio = score / lag(score, n = 1),
+    yoy_ratio = score / lag(score, n = 12)
+  )
+
+# Extract the MoM ratio for the specific period
+mom_value <- ccdi_df %>%
+  filter(period == .env$period) %>%
+  pull(mom_ratio)
+
+# Extract the YoY ratio for the specific period
+yoy_value <- ccdi_df %>%
+  filter(period == .env$period) %>%
+  pull(yoy_ratio)
+
+# Create a small dataframe for the bar chart
+bar_df <- data.frame(
+  Metric = factor(c("YoY", "MoM"), levels = c("YoY", "MoM")), # YoY at bottom, MoM on top
+  Value = c(yoy_value, mom_value)
+)
+
+datatable(bar_df, options = list(
+  dom = 't' # i.e. Table only
+))
+```
+
 
 # Diagnostics
 
