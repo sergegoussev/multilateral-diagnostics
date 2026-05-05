@@ -1,19 +1,26 @@
 ---
 title: "Showcase with Dominick's dataset"
-description: "Dominicks offers us a rich real world scanner dateset (focusing on food from stores)"
+description: "Dominicks supports a constant quality food example"
 bibliography: ../references.bib
 listing:
-  id: tech-topic-series
-  contents: 
-    - "dashboards"
-  sort: "title"
-  type: default
-  categories: true
+  id: dashboards
+  contents: dashboards
+  sort: "title desc"
+  type: table
   fields: [title, subtitle, categories]
-  include:
-    keywords: ["Dominicks"]
+  categories: true
+# listing:
+#   id: dashboards
+#   contents: dashboards
+#   sort: "title"
+#   type: default
+#   categories: true
+#   include:
+#     keywords: ["Dominicks"]
 
 draft: true
+execute:
+  echo: false
 format:
   html:
     toc: true
@@ -28,15 +35,21 @@ The dataset comes pre-categorized in separate product and movement files on the 
 
 [^1]: See [catalogue record](https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html) in the Price Statistics Open Data catalogue for more information about the dataset.
 
+::: {.callout-tip collapse="true"}
+## Data flow
+To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
+
+![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow fig-align="center"}
+:::
+
 ## Categories
 
 To simulate a real use case, lets say that we use Dominick's data for production price indices. Below, several category outputs are shown from a 'birds eye view' of the whole dataset. This is done to pick representative periods that can be selected and used for targeted analysis -- targeted to the specific time period and therefore a simulation of a normal monthly process.
 
 ### Fabric Softener
 
-@fig-fsf-ccdi-example shows the Fabric Softeners category over several years.
-
 ```{r}
+#| echo: true
 #| code-fold: true
 #| code-summary: "Show the code"
 #| out-width: "100%"
@@ -46,17 +59,22 @@ To simulate a real use case, lets say that we use Dominick's data for production
 #| fig-cap: "Fabric Softeners GEKS-T example"
 
 # Load your functions
-source("R/price_indices.R")
+source("../../R/dominicks_utils.R")
+source("../../R/price_indices.R")
 
 library(plotly)
+library(DT)
 
-ird <- read_parquet("data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/fsf_ccdi.parquet")
+
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -70,22 +88,24 @@ fig <- plot_ly(ccdi_df,
          yaxis = list(title = "Index", tickformat = ".01"))
 ```
 
-::: {.panel-tabset}
+::: panel-tabset
 ## Visual
+
 ```{r}
+#| echo: false
 fig
 ```
 
 ## Data
+
 ```{r}
-library(DT)
+#| echo: false
+#| warning: false
 datatable(ccdi_df)
 ```
 :::
 
 ### Beer
-
-@fig-ber-ccdi-example shows the Beer category over several years.
 
 ```{r}
 #| code-fold: true
@@ -96,13 +116,15 @@ datatable(ccdi_df)
 #| label: fig-ber-ccdi-example
 #| fig-cap: "Beer GEKS-T example"
 
-ird <- read_parquet("data/clean/ird_ber_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_ber_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/ber_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -114,13 +136,26 @@ fig <- plot_ly(ccdi_df,
   layout(title = "CCDI with mean splice (Beer category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
+```
 
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-### Front-end-candies
+## Data
 
-@fig-fec-ccdi-example shows the Analgetics category over several years.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+### Front-end-candies
 
 ```{r}
 #| code-fold: true
@@ -131,13 +166,15 @@ fig
 #| label: fig-fec-ccdi-example
 #| fig-cap: "Front-end-candies GEKS-T example"
 
-ird <- read_parquet("data/clean/ird_fec_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_fec_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/fec_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -150,12 +187,26 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-### Cookies
+## Data
 
-@fig-coo-ccdi-example shows the Cookies category over several years.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+### Cookies
 
 ```{r}
 #| code-fold: true
@@ -166,13 +217,15 @@ fig
 #| label: fig-coo-ccdi-example
 #| fig-cap: "Cookies GEKS-T example"
 
-ird <- read_parquet("data/clean/ird_coo_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_coo_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/coo_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -185,12 +238,26 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-### Bottled Juices
+## Data
 
-@fig-bjc-ccdi-example shows the Bottled Juices category over several years.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+### Bottled Juices
 
 ```{r}
 #| code-fold: true
@@ -201,13 +268,15 @@ fig
 #| label: fig-bjc-ccdi-example
 #| fig-cap: "Bottled Juices GEKS-T example"
 
-ird <- read_parquet("data/clean/ird_bjc_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_bjc_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/bjc_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -220,12 +289,26 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-### Oatmeal
+## Data
 
-@fig-ber-ccdi-example shows the Beer category over several years.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+### Oatmeal
 
 ```{r}
 #| code-fold: true
@@ -236,13 +319,15 @@ fig
 #| label: fig-oat-ccdi-example
 #| fig-cap: "Oatmeal GEKS-T example"
 
-ird <- read_parquet("data/clean/ird_oat_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("../../data/clean/ird_oat_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/oat_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -255,11 +340,27 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-## Dominicks specific data flow
+## Data
 
-To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
 
-![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow}
+## Example dashboards
+
+::: {#dashboards}
+
+:::

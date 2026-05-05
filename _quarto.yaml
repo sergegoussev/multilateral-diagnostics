@@ -2,6 +2,9 @@ project:
   type: website
   resources:
     - "docs/*.pdf"
+  render:
+    - "*.qmd"
+    - "!*.md"
 
 execute:
   freeze: auto
@@ -25,8 +28,8 @@ website:
         menu:
           - href: docs/examples/dominicks.qmd
             text: "Dominick's dataset"
-          - href: docs/examples/nz-electronics.qmd
-            text: "NZ electronics dataset"
+          # - href: docs/examples/nz-electronics.qmd
+          #   text: "NZ electronics dataset"
     
 
 format:
