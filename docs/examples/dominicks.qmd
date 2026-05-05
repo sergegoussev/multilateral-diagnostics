@@ -1,8 +1,26 @@
 ---
 title: "Showcase with Dominick's dataset"
-description: "Dominicks offers us a rich real world scanner dateset (focusing on food from stores)"
+description: "Dominicks supports a constant quality food example"
 bibliography: ../references.bib
+listing:
+  id: dashboards
+  contents: dashboards
+  sort: "title desc"
+  type: table
+  fields: [title, subtitle, categories]
+  categories: true
+# listing:
+#   id: dashboards
+#   contents: dashboards
+#   sort: "title"
+#   type: default
+#   categories: true
+#   include:
+#     keywords: ["Dominicks"]
+
 draft: true
+execute:
+  echo: false
 format:
   html:
     toc: true
@@ -11,21 +29,27 @@ format:
 
 ## Overview of the data
 
-The Dominick's dataset is a rich rich and very useful dataset to leverage in validating how diagnostics and analytics can be designed with scanner data. Since it was first proposed by @mehrhoff2018promoting, it has been widely used within price statistics, from analysis of multilateral methods by @lamboray2021index to empirical tests for the decomposition of multilateral methods by @webster2019decomposing. We leverage this dataset as it provides a very realistic example that NSOs would need to work with.
+Dominick's is a rich and very useful dataset to that can act as a representative scanner example. Since it was first proposed by @mehrhoff2018promoting, it has been widely used within price statistics, from analysis of multilateral methods by @lamboray2021index to empirical tests for the decomposition of multilateral methods by @webster2019decomposing. We leverage this dataset as it provides a very realistic example that NSOs would need to work with.
 
 The dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website (@dominicksmanual).[^1] This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data.
 
 [^1]: See [catalogue record](https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html) in the Price Statistics Open Data catalogue for more information about the dataset.
 
+::: {.callout-tip collapse="true"}
+## Data flow
+To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
+
+![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow fig-align="center"}
+:::
+
 ## Categories
 
-To simulate a real use case, lets say that we use Dominick's data for production price indices. Below, several category outputs are shown from a 'birds eye view' of the whole dataset. This is done to pick representative periods that can be selected and used for targeted analysis -- targeted to the specific time period and therefore a simulation of a normal monthly process. 
+To simulate a real use case, lets say that we use Dominick's data for production price indices. Below, several category outputs are shown from a 'birds eye view' of the whole dataset. This is done to pick representative periods that can be selected and used for targeted analysis -- targeted to the specific time period and therefore a simulation of a normal monthly process.
 
 ### Fabric Softener
 
-@fig-fsf-ccdi-example shows the Fabric Softeners category over several years.
-
 ```{r}
+#| echo: true
 #| code-fold: true
 #| code-summary: "Show the code"
 #| out-width: "100%"
@@ -35,25 +59,22 @@ To simulate a real use case, lets say that we use Dominick's data for production
 #| fig-cap: "Fabric Softeners GEKS-T example"
 
 # Load your functions
-source("../../src/dominicks_utils.R")
+source("../../R/dominicks_utils.R")
+source("../../R/price_indices.R")
 
 library(plotly)
+library(DT)
 
-ird <- homogenous_product_aggregation(
-        category_name='fsf',
-        data_dir='../../data/processed',
-        time_sample=c(1,2),
-        group_by_parameters=c('NITEM', 'REF_PERIOD'),
-        window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
-    )
+ird <- read_parquet("../../data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/fsf_ccdi.parquet")
+
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -64,15 +85,27 @@ fig <- plot_ly(ccdi_df,
                hoverinfo = 'text') %>%
   layout(title = "CCDI with mean splice (Fabric Softeners category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
-         yaxis = list(title = "Index", tickformat = ".1"))
+         yaxis = list(title = "Index", tickformat = ".01"))
+```
 
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
+## Data
+
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
 ### Beer
-
-
-@fig-ber-ccdi-example shows the Beer category over several years.
 
 ```{r}
 #| code-fold: true
@@ -83,21 +116,15 @@ fig
 #| label: fig-ber-ccdi-example
 #| fig-cap: "Beer GEKS-T example"
 
-ird <- homogenous_product_aggregation(
-        category_name='ber',
-        data_dir='../../data/processed',
-        time_sample=c(1,2),
-        group_by_parameters=c('NITEM', 'REF_PERIOD'),
-        window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
-    )
+ird <- read_parquet("../../data/clean/ird_ber_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/ber_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -109,13 +136,26 @@ fig <- plot_ly(ccdi_df,
   layout(title = "CCDI with mean splice (Beer category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
+```
 
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
-### Analgetics
 
+## Data
 
-@fig-ana-ccdi-example shows the Analgetics category over several years.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+### Front-end-candies
 
 ```{r}
 #| code-fold: true
@@ -123,24 +163,18 @@ fig
 #| out-width: "100%"
 #| out-height: "100%"
 #| warning: false
-#| label: fig-ana-ccdi-example
-#| fig-cap: "Analgetics GEKS-T example"
+#| label: fig-fec-ccdi-example
+#| fig-cap: "Front-end-candies GEKS-T example"
 
-ird <- homogenous_product_aggregation(
-        category_name='ana',
-        data_dir='../../data/processed',
-        time_sample=c(1,2),
-        group_by_parameters=c('NITEM', 'REF_PERIOD'),
-        window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
-    )
+ird <- read_parquet("../../data/clean/ird_fec_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/fec_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -149,17 +183,30 @@ fig <- plot_ly(ccdi_df,
                mode = 'lines',
                text = ~paste("Period:", period, "<br>Index:", score),
                hoverinfo = 'text') %>%
-  layout(title = "CCDI with mean splice (Analgetics category)",
+  layout(title = "CCDI with mean splice (Front-end-candies category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
+## Data
+
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
 ### Cookies
-
-
-@fig-coo-ccdi-example shows the Cookies category over several years.
 
 ```{r}
 #| code-fold: true
@@ -170,21 +217,15 @@ fig
 #| label: fig-coo-ccdi-example
 #| fig-cap: "Cookies GEKS-T example"
 
-ird <- homogenous_product_aggregation(
-        category_name='coo',
-        data_dir='../../data/processed',
-        time_sample=c(1,2),
-        group_by_parameters=c('NITEM', 'REF_PERIOD'),
-        window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
-    )
+ird <- read_parquet("../../data/clean/ird_coo_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/coo_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -197,13 +238,26 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
+## Data
+
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
 ### Bottled Juices
-
-
-@fig-bjc-ccdi-example shows the Bottled Juices category over several years.
 
 ```{r}
 #| code-fold: true
@@ -214,21 +268,15 @@ fig
 #| label: fig-bjc-ccdi-example
 #| fig-cap: "Bottled Juices GEKS-T example"
 
-ird <- homogenous_product_aggregation(
-        category_name='bjc',
-        data_dir='../../data/processed',
-        time_sample=c(1,2),
-        group_by_parameters=c('NITEM', 'REF_PERIOD'),
-        window=list(
-        "start" = "1990-12-01",
-        "end"   = "1997-05-01")
-    )
+ird <- read_parquet("../../data/clean/ird_bjc_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
   period = names(ccdi),
   score = as.numeric(ccdi)
 )
+
+write_parquet(ccdi_df, "../../output/bjc_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -241,11 +289,78 @@ fig <- plot_ly(ccdi_df,
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
          yaxis = list(title = "Index", tickformat = ".1"))
 
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
 fig
 ```
 
-## Dominicks specific data flow
+## Data
 
-To contextualize the data flow, @fig-dominicks-data-flow shows how data flows in a research sense, but also how it would flow were it to be a real dataset.
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
 
-![Visual flow of data processing for Dominick's as if it were a real production dataset](/docs/images/dominicks-data-flow.svg){#fig-dominicks-data-flow}
+### Oatmeal
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-oat-ccdi-example
+#| fig-cap: "Oatmeal GEKS-T example"
+
+ird <- read_parquet("../../data/clean/ird_oat_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+write_parquet(ccdi_df, "../../output/oat_ccdi.parquet")
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Oatmeal category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".1"))
+
+```
+
+::: panel-tabset
+## Visual
+
+```{r}
+#| echo: false
+fig
+```
+
+## Data
+
+```{r}
+#| echo: false
+#| warning: false
+datatable(ccdi_df)
+```
+:::
+
+## Example dashboards
+
+::: {#dashboards}
+
+:::

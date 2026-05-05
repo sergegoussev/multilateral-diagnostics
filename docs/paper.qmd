@@ -15,15 +15,15 @@ abstract: |
 
   This research develops and tests a set of sensible default analytic and diagnostic outputs that should play a key operational role. Specifically, it builds on earlier work on data quality testing [@guthmundsdottirs2016] and on foundational work in decomposition of both bilateral [@balk2008price] and multilateral methods [@webster2019decomposing] to outline a comprehensive set of analytical and diagnostic requirements. Dashboards to operationalize these requirements are then demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.
 format:
-  pdf:
-    documentclass: article
-    papersize: letter
-    geometry:
-      - a4paper
-      - margin=1in
-    toc: false
-    number-sections: true
-    colorlinks: true
+  # pdf:
+  #   documentclass: article
+  #   papersize: letter
+  #   geometry:
+  #     - a4paper
+  #     - margin=1in
+  #   toc: false
+  #   number-sections: true
+  #   colorlinks: true
 
   html:
     toc: true

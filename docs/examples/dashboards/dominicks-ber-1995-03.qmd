@@ -1,0 +1,29 @@
+---
+title: "1995-03 Dashboard"
+subtitle: "Monthly Dashboard for Beer sold at Dominick's: March 1995"
+draft: true
+format:
+  html:
+    toc: true
+    toc-expand: 2
+
+categories:
+  - Dominicks
+  - Beer
+  - 1995-03
+  - GEKS
+---
+
+# Overview
+
+
+# Diagnostics
+
+## Analytical (output) diagnostics
+
+
+
+## Input diagnostics
+
+
+## Monitoring / data validation
