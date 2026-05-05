@@ -17,6 +17,8 @@ categories:
 # Overview
 
 ```{r}
+#| echo: false
+#| warning: false
 library(dplyr)
 library(DT)
 library(arrow)
