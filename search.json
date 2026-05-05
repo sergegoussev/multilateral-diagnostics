@@ -21,13 +21,6 @@
     "text": "NotePlaceholder\n\n\n\nThis page will show the application of diagnostics with NZ electronic data"
   },
   {
-    "objectID": "docs/examples/dashboards/dominicks-fsf-1992-07.html",
-    "href": "docs/examples/dashboards/dominicks-fsf-1992-07.html",
-    "title": "1992-07 Dashboard",
-    "section": "",
-    "text": "library(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(DT)\n\nWarning: package 'DT' was built under R version 4.5.2\n\nlibrary(arrow)\n\nWarning: package 'arrow' was built under R version 4.5.2\n\n\n\nAttaching package: 'arrow'\n\n\nThe following object is masked from 'package:utils':\n\n    timestamp\n\nperiod &lt;- \"1992-07\"\n\nccdi_df &lt;- read_parquet(\"../../../output/fsf_ccdi.parquet\")\n\nccdi_df &lt;- ccdi_df %&gt;%\n  arrange(period) %&gt;% # Ensure data is ordered chronologically first\n  mutate(\n    mom_ratio = score / lag(score, n = 1),\n    yoy_ratio = score / lag(score, n = 12)\n  )\n\n# Extract the MoM ratio for the specific period\nmom_value &lt;- ccdi_df %&gt;%\n  filter(period == .env$period) %&gt;%\n  pull(mom_ratio)\n\n# Extract the YoY ratio for the specific period\nyoy_value &lt;- ccdi_df %&gt;%\n  filter(period == .env$period) %&gt;%\n  pull(yoy_ratio)\n\n# Create a small dataframe for the bar chart\nbar_df &lt;- data.frame(\n  Metric = factor(c(\"YoY\", \"MoM\"), levels = c(\"YoY\", \"MoM\")), # YoY at bottom, MoM on top\n  Value = c(yoy_value, mom_value)\n)\n\ndatatable(bar_df, options = list(\n  dom = 't' # i.e. Table only\n))"
-  },
-  {
     "objectID": "docs/examples/dashboards/dominicks-fsf-1992-07.html#analytical-output-diagnostics",
     "href": "docs/examples/dashboards/dominicks-fsf-1992-07.html#analytical-output-diagnostics",
     "title": "1992-07 Dashboard",
@@ -54,13 +47,6 @@
     "title": "Configuration and integration into production",
     "section": "",
     "text": "NotePlaceholder\n\n\n\nThis page will show how demonstrated diagnostics can be integrated into production flows processing alternative data\n\n\n\n\n\nOverall data flow"
-  },
-  {
-    "objectID": "docs/examples/dashboards/dominicks-ber-1995-03.html",
-    "href": "docs/examples/dashboards/dominicks-ber-1995-03.html",
-    "title": "1995-03 Dashboard",
-    "section": "",
-    "text": "library(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(DT)\n\nWarning: package 'DT' was built under R version 4.5.2\n\nlibrary(arrow)\n\nWarning: package 'arrow' was built under R version 4.5.2\n\n\n\nAttaching package: 'arrow'\n\n\nThe following object is masked from 'package:utils':\n\n    timestamp\n\nperiod &lt;- \"1995-03\"\n\nccdi_df &lt;- read_parquet(\"../../../output/ber_ccdi.parquet\")\n\nccdi_df &lt;- ccdi_df %&gt;%\n  arrange(period) %&gt;% # Ensure data is ordered chronologically first\n  mutate(\n    mom_ratio = score / lag(score, n = 1),\n    yoy_ratio = score / lag(score, n = 12)\n  )\n\n# Extract the MoM ratio for the specific period\nmom_value &lt;- ccdi_df %&gt;%\n  filter(period == .env$period) %&gt;%\n  pull(mom_ratio)\n\n# Extract the YoY ratio for the specific period\nyoy_value &lt;- ccdi_df %&gt;%\n  filter(period == .env$period) %&gt;%\n  pull(yoy_ratio)\n\n# Create a small dataframe for the bar chart\nbar_df &lt;- data.frame(\n  Metric = factor(c(\"YoY\", \"MoM\"), levels = c(\"YoY\", \"MoM\")), # YoY at bottom, MoM on top\n  Value = c(yoy_value, mom_value)\n)\n\ndatatable(bar_df, options = list(\n  dom = 't' # i.e. Table only\n))"
   },
   {
     "objectID": "docs/examples/dashboards/dominicks-ber-1995-03.html#analytical-output-diagnostics",
