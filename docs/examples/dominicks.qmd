@@ -85,7 +85,18 @@ fig <- plot_ly(ccdi_df,
                hoverinfo = 'text') %>%
   layout(title = "CCDI with mean splice (Fabric Softeners category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
-         yaxis = list(title = "Index", tickformat = ".01"))
+         yaxis = list(title = "Index", tickformat = ".01"),
+         shapes = list(
+           list(
+             type = "line",
+             x0 = "1992-07",
+             x1 = "1992-07",
+             y0 = 0,
+             y1 = 1,
+             yref = "paper",
+             line = list(color = "red", width = 2)
+           )
+         ))
 ```
 
 ::: panel-tabset
@@ -135,7 +146,18 @@ fig <- plot_ly(ccdi_df,
                hoverinfo = 'text') %>%
   layout(title = "CCDI with mean splice (Beer category)",
          xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
-         yaxis = list(title = "Index", tickformat = ".1"))
+         yaxis = list(title = "Index", tickformat = ".01"),
+         shapes = list(
+           list(
+             type = "line",
+             x0 = "1995-03",
+             x1 = "1995-03",
+             y0 = 0,
+             y1 = 1,
+             yref = "paper",
+             line = list(color = "red", width = 2)
+           )
+         ))
 ```
 
 ::: panel-tabset
