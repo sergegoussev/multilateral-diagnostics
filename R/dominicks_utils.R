@@ -39,7 +39,9 @@ download_category <- function(category_name, output_path) {
   #4. Download and save product (upc) data
   products <- read_csv_arrow(
     product_url,
-    col_types = schema(UPC = float64())
+    col_types = schema(
+        UPC = float64(),
+        NITEM = float64())
     )
   write_parquet(products, glue("{output_path}/upc{category_name}.parquet"))
   
