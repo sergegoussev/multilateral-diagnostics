@@ -19,36 +19,13 @@ categories:
 ```{r}
 #| echo: false
 #| warning: false
-library(dplyr)
-library(DT)
-library(arrow)
 
 period <- "1995-03"
+category_name <- "ber"
 
-ccdi_df <- read_parquet("../../../output/ber_ccdi.parquet")
+source("../../../R/diagnostics.R")
 
-ccdi_df <- ccdi_df %>%
-  arrange(period) %>% # Ensure data is ordered chronologically first
-  mutate(
-    mom_ratio = score / lag(score, n = 1),
-    yoy_ratio = score / lag(score, n = 12)
-  )
-
-# Extract the MoM ratio for the specific period
-mom_value <- ccdi_df %>%
-  filter(period == .env$period) %>%
-  pull(mom_ratio)
-
-# Extract the YoY ratio for the specific period
-yoy_value <- ccdi_df %>%
-  filter(period == .env$period) %>%
-  pull(yoy_ratio)
-
-# Create a small dataframe for the bar chart
-bar_df <- data.frame(
-  Metric = factor(c("YoY", "MoM"), levels = c("YoY", "MoM")), # YoY at bottom, MoM on top
-  Value = c(yoy_value, mom_value)
-)
+bar_df <- overview_table(period, category_name)
 
 datatable(bar_df, options = list(
   dom = 't' # i.e. Table only
@@ -65,3 +42,14 @@ datatable(bar_df, options = list(
 
 
 ## Monitoring / data validation
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-align: center
+#| fig-height: 8
+#| fig-width: 10
+
+monitoring_stats(period, category_name)
+
+```
