@@ -53,45 +53,74 @@ overview_table <- function(period, category_name){
 monitoring_stats <- function(period, category_name){
     raw_data = read_parquet(glue("../../../data/processed/processed_{category_name}.parquet"))
 
-    stop_at_period_data <- raw_data %>%
-    filter(REF_PERIOD <= period)
+  raw_data = read_parquet(glue("../../../data/processed/processed_{category_name}.parquet"))
 
-    result <- stop_at_period_data %>%
-    group_by(REF_PERIOD) %>%
-    summarize(
-        number_of_rows             = n(),                  # Count of rows
-        total_sales        = sum(SALES),         # Sum of column2
-        number_of_weeks    = n_distinct(WEEK),   # Unique count of column3
-        start_of_month     = first(START),
-        end_of_month       = last(END),
-        distinct_stores    = n_distinct(STORE),
-        distinct_upcs      = n_distinct(UPC),
-        distinct_com_codes = n_distinct(COM_CODE),
-        distinct_nitems    = n_distinct(NITEM),
-        distinct_zones     = n_distinct(ZONE),
-        .groups            = 'drop' # Drops the grouping structure after summarizing
-    )
+  stop_at_period_data <- raw_data %>%
+      filter(REF_PERIOD <= period)
 
-    # Reshape the data to a long format, excluding date columns to avoid type conflicts
-    long_result <- result %>%
-    select(-start_of_month, -end_of_month) %>%
-    pivot_longer(cols = -REF_PERIOD, names_to = "Metric", values_to = "Value")
+  result <- stop_at_period_data %>%
+      group_by(WEEK) %>%
+      summarize(
+          number_of_rows     = n(),                # Count of rows
+          total_sales        = round(sum(SALES), digits=2),         # Sum of column2
+          # number_of_weeks    = n_distinct(WEEK),   # Unique count of column3
+          ref_period         = first(REF_PERIOD),
+          week_start         = first(START),
+          week_end           = last(END),
+          distinct_stores    = n_distinct(STORE),
+          distinct_upcs      = n_distinct(UPC),
+          distinct_com_codes = n_distinct(COM_CODE),
+          distinct_nitems    = n_distinct(NITEM),
+          distinct_zones     = n_distinct(ZONE),
+          .groups            = 'drop' # Drops the grouping structure after summarizing
+      )
 
-    # Create faceted boxplots and add a red dashed line for the period_of_focus
-    p <- ggplot(long_result, aes(x = Metric, y = Value)) +
-    geom_boxplot(fill = "lightgray") +
-    geom_hline(data = filter(long_result, REF_PERIOD == period), 
-                aes(yintercept = Value), color = "red", linetype = "dashed", linewidth = 1) +
-    facet_wrap(~ Metric, scales = "free", ncol = 3) +
-    theme_minimal() +
-    theme(
-        axis.text.x = element_blank(), 
-        axis.ticks.x = element_blank(), 
-        axis.title.x = element_blank(),
-        panel.spacing = unit(2, "lines") # Adds whitespace between the faceted panels
-    ) +
-    labs(title = paste("Key monitoring metrics, focus on", period), y = "Value")
+  period_data <- result %>%
+      filter(ref_period == period)
+
+  cat("Overview statistics for the weeks included in this month's data")
+
+  datatable(period_data, options = list(
+    dom = 't' # i.e. Table only
+  ))
+
+  weekly_stats <- result %>%
+      filter(ref_period < period)
+
+  # 1. Identify the numeric metrics to plot
+  metrics_cols <- c("number_of_rows", "total_sales", "distinct_stores", 
+                    "distinct_upcs", "distinct_com_codes", "distinct_nitems", "distinct_zones")
+
+  # 2. Reshape historical data into a long format for faceting
+  weekly_stats_long <- weekly_stats %>%
+    select(all_of(metrics_cols)) %>%
+    pivot_longer(cols = everything(), names_to = "Metric", values_to = "Value")
+
+  # 3. Loop over each week in the current period
+  for (i in seq_len(nrow(period_data))) {
+    current_week <- period_data[i, ]
     
-    ggplotly(p)
-#   return(p)
+    # Reshape just the current week's row
+    current_week_long <- current_week %>%
+      select(all_of(metrics_cols)) %>%
+      pivot_longer(cols = everything(), names_to = "Metric", values_to = "Value")
+    
+    # Build and print the plot
+    p <- ggplot(weekly_stats_long, aes(x = Metric, y = Value)) +
+      geom_boxplot(fill = "lightgray") +
+      geom_hline(data = current_week_long, aes(yintercept = Value), color = "red", linetype = "dashed", linewidth = 1) +
+      facet_wrap(~ Metric, scales = "free", ncol = 3) +
+      theme_minimal() +
+      theme(
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank(),
+        panel.spacing = unit(2, "lines")
+      ) +
+      labs(title = paste("Weekly Metrics Distribution - Highlighted Week:", current_week$WEEK), y = "Value")
+
+    cat(glue("Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends"))
+    
+    print(p)
+  }
 }

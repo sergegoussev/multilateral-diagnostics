@@ -5,12 +5,11 @@ draft: true
 format:
   html:
     toc: true
-    toc-expand: 2
+    toc-expand: 3
 
 categories:
   - Dominicks
   - Fabric Softener
-  - 1992-07
   - GEKS
 ---
 
@@ -46,11 +45,8 @@ datatable(bar_df, options = list(
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-align: center
-#| fig-height: 8
-#| fig-width: 10
+#| results: asis
 
 monitoring_stats(period, category_name)
 
 ```
-

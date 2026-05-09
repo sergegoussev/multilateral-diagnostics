@@ -10,7 +10,6 @@ format:
 categories:
   - Dominicks
   - Beer
-  - 1995-03
   - GEKS
 ---
 
@@ -46,9 +45,6 @@ datatable(bar_df, options = list(
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-align: center
-#| fig-height: 8
-#| fig-width: 10
 
 monitoring_stats(period, category_name)
 
