@@ -1,6 +1,7 @@
 # Quarto components
 .quarto/
 _site/
+*_files/
 /site_libs/
 
 *_temp.*

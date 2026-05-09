@@ -5,6 +5,7 @@ library(glue)
 library(ggplot2)
 library(tidyr)
 library(plotly)
+library(htmltools)
 
 #' Function to render MoM and YoY table on the specific category
 #' 
@@ -19,8 +20,8 @@ overview_table <- function(period, category_name){
     ccdi_df <- ccdi_df %>%
     arrange(period) %>% # Ensure data is ordered chronologically first
     mutate(
-        mom_ratio = score / lag(score, n = 1),
-        yoy_ratio = score / lag(score, n = 12)
+        mom_ratio = round(score / lag(score, n = 1), digits=4),
+        yoy_ratio = round(score / lag(score, n = 12), digits=4)
     )
 
     # Extract the MoM ratio for the specific period
@@ -78,11 +79,13 @@ monitoring_stats <- function(period, category_name){
   period_data <- result %>%
       filter(ref_period == period)
 
-  cat("Overview statistics for the weeks included in this month's data")
+  cat("Overview statistics for the weeks included in this month's data  \n")
 
-  datatable(period_data, options = list(
+  print(
+    htmltools::tagList(
+    datatable(period_data, options = list(
     dom = 't' # i.e. Table only
-  ))
+  ))))
 
   weekly_stats <- result %>%
       filter(ref_period < period)
@@ -117,9 +120,9 @@ monitoring_stats <- function(period, category_name){
         axis.title.x = element_blank(),
         panel.spacing = unit(2, "lines")
       ) +
-      labs(title = paste("Weekly Metrics Distribution - Highlighted Week:", current_week$WEEK), y = "Value")
+      labs(title = paste("Weekly Metrics Distribution"), y = "Value")
 
-    cat(glue("Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends"))
+    cat(glue("  \n Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends  \n"))
     
     print(p)
   }

@@ -5,9 +5,11 @@ project:
   render:
     - "*.qmd"
     - "!*.md"
+  output-dir: _site
 
 execute:
-  freeze: auto
+  freeze: true
+  cache: false
 
 website:
   title: "Diagnostics for multilateral price indices"
