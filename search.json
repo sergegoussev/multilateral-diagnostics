@@ -39,7 +39,7 @@
     "href": "docs/examples/dashboards/dominicks-fsf-1992-07.html#monitoring-data-validation",
     "title": "1992-07 Dashboard",
     "section": "Monitoring / data validation",
-    "text": "Monitoring / data validation"
+    "text": "Monitoring / data validation\n\nWeeks in sampleOverview statistics for the weeks included in this month’s data### Week 146 (1992-06-25 to 1992-07-01) in focusStatistics for this this week relative the distribution in previous weeks### Week 147 (1992-07-02 to 1992-07-08) in focusStatistics for this this week relative the distribution in previous weeks### Week 148 (1992-07-09 to 1992-07-15) in focusStatistics for this this week relative the distribution in previous weeks### Week 149 (1992-07-16 to 1992-07-22) in focusStatistics for this this week relative the distribution in previous weeks### Week 150 (1992-07-23 to 1992-07-29) in focusStatistics for this this week relative the distribution in previous weeks"
   },
   {
     "objectID": "docs/configuration.html",
@@ -67,7 +67,7 @@
     "href": "docs/examples/dashboards/dominicks-ber-1995-03.html#monitoring-data-validation",
     "title": "1995-03 Dashboard",
     "section": "Monitoring / data validation",
-    "text": "Monitoring / data validation"
+    "text": "Monitoring / data validation\n\n\nOverview statistics for the weeks included in this month's dataWeek 286 (1995-03-02 to 1995-03-08) in focus, compared to previous trends\n\n\n\n\n\n\n\n\n\nWeek 287 (1995-03-09 to 1995-03-15) in focus, compared to previous trends\n\n\n\n\n\n\n\n\n\nWeek 288 (1995-03-16 to 1995-03-22) in focus, compared to previous trends\n\n\n\n\n\n\n\n\n\nWeek 289 (1995-03-23 to 1995-03-29) in focus, compared to previous trends"
   },
   {
     "objectID": "docs/examples/dominicks.html",
@@ -95,7 +95,7 @@
     "href": "docs/examples/dominicks.html#example-dashboards",
     "title": "Showcase with Dominick’s dataset",
     "section": "Example dashboards",
-    "text": "Example dashboards\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nSubtitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\n1995-03 Dashboard\n\n\nMonthly Dashboard for Beer sold at Dominick’s: March 1995\n\n\nDominicks, Beer, 1995-03, GEKS\n\n\n\n\n\n\n1992-07 Dashboard\n\n\nMonthly Dashboard for Fabric Softener sold at Dominick’s: July 1992\n\n\nDominicks, Fabric Softener, 1992-07, GEKS\n\n\n\n\n\n\nNo matching items"
+    "text": "Example dashboards\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nSubtitle\n\n\n\nCategories\n\n\n\n\n\n\n\n\n1995-03 Dashboard\n\n\nMonthly Dashboard for Beer sold at Dominick’s: March 1995\n\n\nDominicks, Beer, GEKS\n\n\n\n\n\n\n1992-07 Dashboard\n\n\nMonthly Dashboard for Fabric Softener sold at Dominick’s: July 1992\n\n\nDominicks, Fabric Softener, GEKS\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "docs/examples/dominicks.html#footnotes",
