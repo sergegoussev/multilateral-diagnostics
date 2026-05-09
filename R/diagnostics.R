@@ -83,9 +83,25 @@ monitoring_stats <- function(period, category_name){
 
   print(
     htmltools::tagList(
-    datatable(period_data, options = list(
-    dom = 't' # i.e. Table only
-  ))))
+    datatable(
+      period_data,
+      extensions = 'Buttons', # For the colvis button
+      options = list(
+        # 'B' adds buttons, 't' is the table
+        dom = 'Bt', 
+        buttons = c('colvis'),
+        columnDefs = list(
+          list(
+            visible = FALSE,      # Hide columns by default
+            targets = c(4, 7, 8)     # Indices of columns to hide (0-indexed)
+          )
+        ),
+        # Force table to occupy full container width
+        autoWidth = TRUE,
+        width = '100%'
+      )
+    )
+  ))
 
   weekly_stats <- result %>%
       filter(ref_period < period)
@@ -124,6 +140,6 @@ monitoring_stats <- function(period, category_name){
 
     cat(glue("  \n Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends  \n"))
     
-    print(p)
+    print(htmltools::tagList(ggplotly(p)))
   }
 }

@@ -45,6 +45,7 @@ datatable(bar_df, options = list(
 ```{r}
 #| echo: false
 #| warning: false
+#| results: asis
 
 monitoring_stats(period, category_name)
 
