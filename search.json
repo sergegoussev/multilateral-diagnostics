@@ -32,7 +32,7 @@
     "href": "docs/examples/dashboards/dominicks-fsf-1992-07.html#input-diagnostics",
     "title": "1992-07 Dashboard",
     "section": "Input diagnostics",
-    "text": "Input diagnostics\nChurn over time - plotting products (NITEM) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month)."
+    "text": "Input diagnostics\n\nChurn over time\nChurn over time - plotting products (NITEM) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).\n\n\n\n\n\n\n\n\nItem-level price relatives\n\nPlot of price change by shareRaw data"
   },
   {
     "objectID": "docs/examples/dashboards/dominicks-fsf-1992-07.html#monitoring-data-validation",
@@ -60,7 +60,7 @@
     "href": "docs/examples/dashboards/dominicks-ber-1995-03.html#input-diagnostics",
     "title": "1995-03 Dashboard",
     "section": "Input diagnostics",
-    "text": "Input diagnostics\nChurn over time - plotting products (NITEM) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month)."
+    "text": "Input diagnostics\n\nChurn over time\nChurn over time - plotting products (NITEM) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).\n\n\n\n\n\n\n\n\nItem-level price relatives\n\nPlot of price change by shareRaw data"
   },
   {
     "objectID": "docs/examples/dashboards/dominicks-ber-1995-03.html#monitoring-data-validation",
