@@ -39,6 +39,20 @@ datatable(bar_df, options = list(
 
 ## Input diagnostics
 
+Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).
+
+```{r}
+#| echo: false
+#| warning: false
+
+ird <- read_parquet(glue("data/clean/ird_{category_name}_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet"))
+
+previous_data <- ird %>%
+      filter(REF_PERIOD <= period)
+
+plot_product_churn(previous_data)
+```
+
 
 ## Monitoring / data validation
 

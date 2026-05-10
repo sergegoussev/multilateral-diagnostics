@@ -141,3 +141,52 @@ plot_weekly_stats <- function(period_data, weekly_stats){
 
   return(htmltools::tagList(plot_list))
 }
+
+
+#' Function to plot product churn (NITEMs entering, leaving, or staying)
+#' 
+#' @param ird_data - Dataframe containing REF_PERIOD and NITEM
+#' @return plotly object
+plot_product_churn <- function(ird_data) {
+  # 1. Prepare data: get set of unique NITEMs per period
+  period_items <- ird_data %>%
+    select(REF_PERIOD, NITEM) %>%
+    distinct() %>%
+    arrange(REF_PERIOD)
+  
+  periods <- unique(period_items$REF_PERIOD)
+  
+  if (length(periods) < 2) return(NULL)
+  
+  # 2. Calculate churn metrics iteratively
+  churn_results <- lapply(seq_along(periods)[-1], function(i) {
+    curr_p <- periods[i]
+    prev_p <- periods[i-1]
+    
+    curr_items <- period_items$NITEM[period_items$REF_PERIOD == curr_p]
+    prev_items <- period_items$NITEM[period_items$REF_PERIOD == prev_p]
+    
+    data.frame(
+      REF_PERIOD = curr_p,
+      Entering = length(setdiff(curr_items, prev_items)),
+      Staying = length(intersect(curr_items, prev_items)),
+      Left = -length(setdiff(prev_items, curr_items)) # Negative for visual distinction
+    )
+  }) %>% bind_rows()
+  
+  plot_df <- churn_results %>%
+    pivot_longer(cols = c(Entering, Staying, Left), names_to = "Status", values_to = "Count") %>%
+    mutate(Status = factor(Status, levels = c("Entering", "Staying", "Left")))
+
+  p <- ggplot(plot_df, aes(x = REF_PERIOD, y = Count, fill = Status)) +
+    geom_bar(stat = "identity") +
+    geom_hline(yintercept = 0, color = "black", linewidth = 0.5) +
+    theme_minimal() +
+    scale_fill_manual(values = c("Entering" = "#2ecc71", "Staying" = "#3498db", "Left" = "#e74c3c")) +
+    labs(title = "Product Churn (NITEMs) Over Time", 
+         subtitle = "Comparison against previous period",
+         x = "Reference Period", y = "Count of NITEMs") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+  return(ggplotly(p))
+}
