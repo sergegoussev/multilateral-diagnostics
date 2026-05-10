@@ -2,7 +2,7 @@
 title: "Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production"
 bibliography: references.bib
 subtitle: |
-  Submitted to the *19th Ottawa Group meeting*
+  Presented at the *19th Ottawa Group meeting*
   *Poland, May 13-15, 2026*
 authors:
     - name: Serge Goussev 
@@ -14,6 +14,11 @@ abstract: |
   Using alternative data as a source in lower level aggregation considerably complicates the task of understanding and explaining price movements within the overall CPI. This is made even harder when the NSO applies multilateral price index methods, as data from multiple time periods is leveraged to measure price change, expanding the amount of data points and trends that must be considered. Specifically, alongside the overall price measure that could process the data as a ‘black box’, National Statistical Organizations (NSOs) need to also identify any issues with the input data that may impact the measurement (input diagnostics) and also explain the calculated index (output analytics). 
 
   This research develops and tests a set of sensible default analytic and diagnostic outputs that should play a key operational role. Specifically, it builds on earlier work on data quality testing [@guthmundsdottirs2016] and on foundational work in decomposition of both bilateral [@balk2008price] and multilateral methods [@webster2019decomposing] to outline a comprehensive set of analytical and diagnostic requirements. Dashboards to operationalize these requirements are then demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.
+citation:
+  type: paper-conference
+  container-title: "Presented at the 19th Ottawa Group meeting, Warsaw, Poland"
+  available-date: 2026/05/14
+  url: https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html
 format:
   # pdf:
   #   documentclass: article
