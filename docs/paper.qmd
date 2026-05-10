@@ -19,6 +19,7 @@ citation:
   container-title: "Presented at the 19th Ottawa Group meeting, Warsaw, Poland"
   available-date: 2026/05/14
   url: https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html
+google-scholar: true  
 format:
   # pdf:
   #   documentclass: article
