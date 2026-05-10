@@ -15,7 +15,7 @@ library(htmltools)
 #' @output bar_df - dataframe of the YoY and MoM indicator
 overview_table <- function(period, category_name){
 
-    ccdi_df <- read_parquet(glue("../../../output/{category_name}_ccdi.parquet"))
+    ccdi_df <- read_parquet(glue("output/{category_name}_ccdi.parquet"))
 
     ccdi_df <- ccdi_df %>%
     arrange(period) %>% # Ensure data is ordered chronologically first
@@ -50,11 +50,11 @@ overview_table <- function(period, category_name){
 #' @param category_name - short name of the dominicks category of interest, e.g. "ber"
 #' @param period - reference period of interest as string, e.g. "1992-02"
 #' 
-#' @output
+#' @output period_data - dataframe of the statistics for all the weeks of the month
+#' @output weekly_stats - dataframe of all week's data over prior to the reference month
 monitoring_stats <- function(period, category_name){
-    raw_data = read_parquet(glue("../../../data/processed/processed_{category_name}.parquet"))
 
-  raw_data = read_parquet(glue("../../../data/processed/processed_{category_name}.parquet"))
+  raw_data = read_parquet(glue("data/processed/processed_{category_name}.parquet"))
 
   stop_at_period_data <- raw_data %>%
       filter(REF_PERIOD <= period)
@@ -79,36 +79,28 @@ monitoring_stats <- function(period, category_name){
   period_data <- result %>%
       filter(ref_period == period)
 
-  cat("Overview statistics for the weeks included in this month's data  \n")
-
-  print(
-    htmltools::tagList(
-    datatable(
-      period_data,
-      extensions = 'Buttons', # For the colvis button
-      options = list(
-        # 'B' adds buttons, 't' is the table
-        dom = 'Bt', 
-        buttons = c('colvis'),
-        columnDefs = list(
-          list(
-            visible = FALSE,      # Hide columns by default
-            targets = c(4, 7, 8)     # Indices of columns to hide (0-indexed)
-          )
-        ),
-        # Force table to occupy full container width
-        autoWidth = TRUE,
-        width = '100%'
-      )
-    )
-  ))
-
   weekly_stats <- result %>%
       filter(ref_period < period)
 
+  return(list(period_data=period_data, weekly_stats=weekly_stats))
+}
+
+#' Function to plot each week's satistics against the historic distribution
+#' 
+#' @param period_data - dataframe of the statistics for all the weeks of the month
+#' @param weekly_stats - dataframe of all week's data over prior to the reference month
+#' 
+#' @output NA
+plot_weekly_stats <- function(period_data, weekly_stats){
   # 1. Identify the numeric metrics to plot
-  metrics_cols <- c("number_of_rows", "total_sales", "distinct_stores", 
-                    "distinct_upcs", "distinct_com_codes", "distinct_nitems", "distinct_zones")
+  metrics_cols <- c(
+    "number_of_rows", 
+    "total_sales", 
+    "distinct_stores", 
+    "distinct_upcs", 
+    "distinct_com_codes",
+    "distinct_nitems",
+    "distinct_zones")
 
   # 2. Reshape historical data into a long format for faceting
   weekly_stats_long <- weekly_stats %>%
@@ -140,6 +132,6 @@ monitoring_stats <- function(period, category_name){
 
     cat(glue("  \n Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends  \n"))
     
-    print(htmltools::tagList(ggplotly(p)))
+    print(ggplotly(p))
   }
 }

@@ -1,5 +1,6 @@
 project:
   type: website
+  execute-dir: project
   resources:
     - "docs/*.pdf"
   render:
