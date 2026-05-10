@@ -39,6 +39,8 @@ datatable(bar_df, options = list(
 
 ## Input diagnostics
 
+### Churn over time
+
 Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).
 
 ```{r}
@@ -47,12 +49,40 @@ Churn over time - plotting products (`NITEM`) entering the sample, products stay
 
 ird <- read_parquet(glue("data/clean/ird_{category_name}_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet"))
 
-previous_data <- ird %>%
+data_up_to_period <- ird %>%
       filter(REF_PERIOD <= period)
 
-plot_product_churn(previous_data)
+plot_product_churn(data_up_to_period)
+```
+### Item-level price relatives
+
+```{r}
+#| echo: false
+#| warning: false
+
+unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
 ```
 
+::: panel-tabset  
+## Plot of price change by share
+
+```{r}
+#| echo: false
+#| warning: false
+
+plot_item_price_relatives(unit_price_changes)
+```
+
+## Raw data
+
+```{r}
+#| echo: false
+#| warning: false
+
+datatable(unit_price_changes)
+```
+
+:::
 
 ## Monitoring / data validation
 

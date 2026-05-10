@@ -190,3 +190,60 @@ plot_product_churn <- function(ird_data) {
 
   return(ggplotly(p))
 }
+
+#' Function to generate a table of item-level price ratios vs previous period
+#' 
+#' @param ird_data - Dataframe containing historical data up to current period
+#' @param period - Current period string (e.g., "1992-07")
+#' @return DT datatable
+item_price_ratio_table <- function(ird_data, period) {
+  # 1. Identify previous period from sorted list of available periods
+  periods <- unique(ird_data$REF_PERIOD) %>% sort()
+  idx <- which(periods == period)
+
+  # Return NULL if 
+  if (length(periods) < 2) return(NULL)
+  prev_period <- periods[idx - 1]
+  
+  # 2. Match items and calculate price ratio and average share
+  curr_data <- ird_data %>% 
+    filter(REF_PERIOD == period) %>% 
+    select(NITEM, PRICE_curr = PRICE, SHARE_curr = SHARE)
+
+  prev_data <- ird_data %>% 
+    filter(REF_PERIOD == prev_period) %>% 
+    select(NITEM, PRICE_prev = PRICE, SHARE_prev = SHARE)
+
+  ratios <- curr_data %>%
+    inner_join(
+      prev_data, by = "NITEM"
+    ) %>%
+    mutate(
+      Price_Ratio = round(PRICE_curr / PRICE_prev, 4),
+      Avg_Share = round((SHARE_curr + SHARE_prev) / 2, 4)
+    ) %>%
+    select(NITEM, Price_Prev = PRICE_prev, Price_Curr = PRICE_curr, Price_Ratio, Avg_Share) %>%
+    arrange(desc(Price_Ratio))
+    
+  return(ratios)
+}
+
+#' Function to plot item-level price relatives vs expenditure shares
+#' 
+#' @param ratio_data - Dataframe output from item_price_ratio_table()
+#' @return plotly object
+plot_item_price_relatives <- function(ratio_data) {
+  if (is.null(ratio_data) || nrow(ratio_data) == 0) return(NULL)
+  
+  p <- ggplot(ratio_data, aes(x = Avg_Share, y = Price_Ratio, text = paste(
+    "NITEM:", NITEM,
+    "<br>Price Prev:", Price_Prev,
+    "<br>Price Curr:", Price_Curr
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+    theme_minimal() +
+    labs(x = "Average Expenditure Share", y = "Price Ratio")
+  
+  return(ggplotly(p, tooltip = "text"))
+}
