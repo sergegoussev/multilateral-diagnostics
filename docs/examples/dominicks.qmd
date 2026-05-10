@@ -59,13 +59,13 @@ To simulate a real use case, lets say that we use Dominick's data for production
 #| fig-cap: "Fabric Softeners GEKS-T example"
 
 # Load your functions
-source("../../R/dominicks_utils.R")
-source("../../R/price_indices.R")
+source("R/dominicks_utils.R")
+source("R/price_indices.R")
 
 library(plotly)
 library(DT)
 
-ird <- read_parquet("../../data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -73,7 +73,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/fsf_ccdi.parquet")
+write_parquet(ccdi_df, "output/fsf_ccdi.parquet")
 
 
 fig <- plot_ly(ccdi_df, 
@@ -127,7 +127,7 @@ datatable(ccdi_df)
 #| label: fig-ber-ccdi-example
 #| fig-cap: "Beer GEKS-T example"
 
-ird <- read_parquet("../../data/clean/ird_ber_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_ber_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -135,7 +135,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/ber_ccdi.parquet")
+write_parquet(ccdi_df, "output/ber_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -188,7 +188,7 @@ datatable(ccdi_df)
 #| label: fig-fec-ccdi-example
 #| fig-cap: "Front-end-candies GEKS-T example"
 
-ird <- read_parquet("../../data/clean/ird_fec_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_fec_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -196,7 +196,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/fec_ccdi.parquet")
+write_parquet(ccdi_df, "output/fec_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -239,7 +239,7 @@ datatable(ccdi_df)
 #| label: fig-coo-ccdi-example
 #| fig-cap: "Cookies GEKS-T example"
 
-ird <- read_parquet("../../data/clean/ird_coo_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_coo_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -247,7 +247,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/coo_ccdi.parquet")
+write_parquet(ccdi_df, "output/coo_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -290,7 +290,7 @@ datatable(ccdi_df)
 #| label: fig-bjc-ccdi-example
 #| fig-cap: "Bottled Juices GEKS-T example"
 
-ird <- read_parquet("../../data/clean/ird_bjc_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_bjc_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -298,7 +298,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/bjc_ccdi.parquet")
+write_parquet(ccdi_df, "output/bjc_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 
@@ -341,7 +341,7 @@ datatable(ccdi_df)
 #| label: fig-oat-ccdi-example
 #| fig-cap: "Oatmeal GEKS-T example"
 
-ird <- read_parquet("../../data/clean/ird_oat_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+ird <- read_parquet("data/clean/ird_oat_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
 
 ccdi <- spliced_CCDI(ird)
 ccdi_df <- data.frame(
@@ -349,7 +349,7 @@ ccdi_df <- data.frame(
   score = as.numeric(ccdi)
 )
 
-write_parquet(ccdi_df, "../../output/oat_ccdi.parquet")
+write_parquet(ccdi_df, "output/oat_ccdi.parquet")
 
 fig <- plot_ly(ccdi_df, 
                x = ~period, 

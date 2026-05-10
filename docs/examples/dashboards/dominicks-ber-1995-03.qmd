@@ -90,6 +90,9 @@ datatable(
 #| echo: false
 #| warning: false
 
-plot_weekly_stats(results$period_data, results$weekly_stats)
+library(plotly)
+library(htmltools)
 
+widgets <- plot_weekly_stats(results$period_data, results$weekly_stats)
+widgets
 ```

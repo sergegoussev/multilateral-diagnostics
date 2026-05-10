@@ -90,7 +90,7 @@ monitoring_stats <- function(period, category_name){
 #' @param period_data - dataframe of the statistics for all the weeks of the month
 #' @param weekly_stats - dataframe of all week's data over prior to the reference month
 #' 
-#' @output NA
+#' @output tagList of plotly graphs
 plot_weekly_stats <- function(period_data, weekly_stats){
   # 1. Identify the numeric metrics to plot
   metrics_cols <- c(
@@ -107,8 +107,8 @@ plot_weekly_stats <- function(period_data, weekly_stats){
     select(all_of(metrics_cols)) %>%
     pivot_longer(cols = everything(), names_to = "Metric", values_to = "Value")
 
-  # 3. Loop over each week in the current period
-  for (i in seq_len(nrow(period_data))) {
+  # 3. Loop over each week in the current period and save plots to a list
+  plot_list <- lapply(seq_len(nrow(period_data)), function(i) {
     current_week <- period_data[i, ]
     
     # Reshape just the current week's row
@@ -128,10 +128,16 @@ plot_weekly_stats <- function(period_data, weekly_stats){
         axis.title.x = element_blank(),
         panel.spacing = unit(2, "lines")
       ) +
-      labs(title = paste("Weekly Metrics Distribution"), y = "Value")
+      labs(
+        title = glue("Week {current_week$WEEK} Distribution ({current_week$week_start})"), 
+        subtitle = "Red dashed line represents current week",
+        y = "Value"
+      )
 
-    cat(glue("  \n Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends  \n"))
+    # cat(glue("  \n Week {current_week$WEEK} ({current_week$week_start} to {current_week$week_end}) in focus, compared to previous trends  \n"))
     
-    print(ggplotly(p))
-  }
+    ggplotly(p)
+  })
+
+  return(htmltools::tagList(plot_list))
 }

@@ -22,7 +22,7 @@ categories:
 period <- "1992-07"
 category_name <- "fsf"
 
-source("../../../R/diagnostics.R")
+source("R/diagnostics.R")
 
 bar_df <- overview_table(period, category_name)
 
@@ -42,11 +42,56 @@ datatable(bar_df, options = list(
 
 ## Monitoring / data validation
 
+
+The following weeks' data was used a input for the last month.
+
 ```{r}
 #| echo: false
 #| warning: false
-#| results: asis
 
-monitoring_stats(period, category_name)
+results <- monitoring_stats(period, category_name)
 
+results$period_data <- results$period_data[, c(
+  "WEEK", 
+  "week_start", 
+  "week_end", 
+  "distinct_upcs",
+  "distinct_nitems",
+  "total_sales",
+  "number_of_rows",
+  "distinct_stores",
+  "distinct_com_codes",
+  "distinct_zones",
+  "ref_period")]
+
+datatable(
+      results$period_data,
+      extensions = 'Buttons', # For the colvis button
+      options = list(
+        # 'B' adds buttons, 't' is the table
+        dom = 'Bt', 
+        buttons = c('colvis'),
+        columnDefs = list(
+          list(
+            visible = FALSE,      # Hide columns by default
+            targets = c(4, 8, 9, 10, 11)     # Hide a few to simplify UI
+          )
+        ),
+        # Force table to occupy full container width
+        autoWidth = TRUE,
+        width = '100%'
+      )
+    )
+```
+
+### Week by week breakdown
+```{r}
+#| echo: false
+#| warning: false
+
+library(plotly)
+library(htmltools)
+
+widgets <- plot_weekly_stats(results$period_data, results$weekly_stats)
+widgets
 ```
