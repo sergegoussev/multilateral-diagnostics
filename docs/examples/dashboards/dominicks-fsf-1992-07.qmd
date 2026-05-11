@@ -31,17 +31,15 @@ datatable(bar_df, options = list(
 ))
 ```
 
-
 # Diagnostics
 
 ## Analytical (output) diagnostics
-
 
 ## Input diagnostics
 
 ### Churn over time
 
-Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).
+Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previous period) and products leaving the sample (i.e. not seen this month).
 
 ```{r}
 #| echo: false
@@ -54,6 +52,7 @@ data_up_to_period <- ird %>%
 
 plot_product_churn(data_up_to_period)
 ```
+
 ### Item-level price relatives
 
 ```{r}
@@ -63,7 +62,7 @@ plot_product_churn(data_up_to_period)
 unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
 ```
 
-::: panel-tabset  
+::: panel-tabset
 ## Plot of price change by share
 
 ```{r}
@@ -81,11 +80,9 @@ plot_item_price_relatives(unit_price_changes)
 
 datatable(unit_price_changes)
 ```
-
 :::
 
 ## Monitoring / data validation
-
 
 The following weeks' data was used a input for the last month.
 
@@ -129,6 +126,7 @@ datatable(
 ```
 
 ### Week by week breakdown
+
 ```{r}
 #| echo: false
 #| warning: false

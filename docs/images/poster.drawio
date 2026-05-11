@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="oHnh6UNSqRAPnfntmK9I">
-    <mxGraphModel dx="3323" dy="2047" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2756" pageHeight="3937" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="1023" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2756" pageHeight="3937" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -172,7 +172,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-152" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;strokeColor=#23445d;fontSize=21;fillColor=#bac8d3;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="elementary price index" vertex="1">
-          <mxGeometry height="134.279176201373" width="309.375" x="1296.4285714285713" y="470.72311212814645" as="geometry" />
+          <mxGeometry height="134.279176201373" width="309.375" x="1296.4285714285713" y="511.72311212814645" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-153" parent="jIPdDWwgm-WVVv-HL_MQ-152" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=21;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="" vertex="1">
           <mxGeometry height="34" width="309.375" y="30" as="geometry" />
@@ -259,24 +259,17 @@
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-170" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=21;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="Homogenous product aggregation" vertex="1">
           <mxGeometry height="74.59954233409611" width="220.98214285714283" x="553.9285714285713" y="926.5263157894736" as="geometry" />
         </mxCell>
-        <mxCell id="jIPdDWwgm-WVVv-HL_MQ-171" edge="1" parent="jIPdDWwgm-WVVv-HL_MQ-227" source="jIPdDWwgm-WVVv-HL_MQ-173" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=21;" target="jIPdDWwgm-WVVv-HL_MQ-152">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1209.5089285714284" y="916.0823798627001" />
-              <mxPoint x="1246.3392857142858" y="916.0823798627001" />
-              <mxPoint x="1246.3392857142858" y="520.7048054919908" />
-              <mxPoint x="1296.4285714285713" y="520.7048054919908" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-172" edge="1" parent="jIPdDWwgm-WVVv-HL_MQ-227" source="jIPdDWwgm-WVVv-HL_MQ-173" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;fontSize=21;" target="jIPdDWwgm-WVVv-HL_MQ-174">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s85Vvh_YZopOpZ_VqlYl-1" edge="1" parent="jIPdDWwgm-WVVv-HL_MQ-227" source="jIPdDWwgm-WVVv-HL_MQ-173" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;sketch=1;curveFitting=1;jiggle=2;" target="jIPdDWwgm-WVVv-HL_MQ-153">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-173" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=21;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="Multilateral price index method and contributions" vertex="1">
           <mxGeometry height="89.51945080091532" width="243.08035714285714" x="966.4285714285713" y="881.7665903890161" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-174" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;strokeColor=#23445d;fontSize=21;fillColor=#bac8d3;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="contributions" vertex="1">
-          <mxGeometry height="134.279176201373" width="309.375" x="1296.4285714285713" y="628.1281464530892" as="geometry" />
+          <mxGeometry height="134.279176201373" width="309.375" x="1296.4285714285713" y="669.1281464530892" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-175" parent="jIPdDWwgm-WVVv-HL_MQ-174" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=21;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="" vertex="1">
           <mxGeometry height="34" width="309.375" y="30" as="geometry" />
@@ -336,10 +329,10 @@
           <mxGeometry height="149.19908466819223" width="456.69642857142856" x="789.6428571428572" y="337.9359267734554" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-188" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;legacyAnchorPoints=0;rotation=-90;sketch=1;curveFitting=1;jiggle=2;shadow=0;fontSize=21;" value="" vertex="1">
-          <mxGeometry height="339.4279176201373" width="29.464285714285715" x="1441.908482142857" y="280.1212814645309" as="geometry" />
+          <mxGeometry height="339.4279176201373" width="29.464285714285715" x="1441.908482142857" y="320.1212814645309" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-189" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;fontSize=21;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Index &amp;amp; contributions&lt;/h1&gt;&lt;p&gt;&lt;font&gt;Elementary price index and the individual product contributions that decompose the overall into its parts&lt;/font&gt;&lt;/p&gt;" vertex="1">
-          <mxGeometry height="167.84897025171625" width="397.7678571428571" x="1252.2321428571427" y="280.1212814645309" as="geometry" />
+          <mxGeometry height="213.88" width="397.77" x="1252.23" y="266.12" as="geometry" />
         </mxCell>
         <mxCell id="jIPdDWwgm-WVVv-HL_MQ-190" parent="jIPdDWwgm-WVVv-HL_MQ-227" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;strokeColor=#23445d;fontSize=21;fillColor=#bac8d3;sketch=1;curveFitting=1;jiggle=2;shadow=0;" value="Data table" vertex="1">
           <mxGeometry height="134.279176201373" width="309.375" x="813.2142857142857" y="1149.720823798627" as="geometry" />
@@ -516,7 +509,7 @@
         <mxCell id="0asuUWs828OCndWCZpTJ-13" connectable="0" parent="1" style="group" value="4" vertex="1">
           <mxGeometry height="80" width="630" x="80" y="2530" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-14" parent="0asuUWs828OCndWCZpTJ-13" style="rounded=1;whiteSpace=wrap;html=1;fontSize=26;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Example with Dominick&#39;s" vertex="1">
+        <mxCell id="0asuUWs828OCndWCZpTJ-14" parent="0asuUWs828OCndWCZpTJ-13" style="rounded=1;whiteSpace=wrap;html=1;fontSize=26;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Example using Dominick&#39;s scanner data" vertex="1">
           <mxGeometry height="60" width="540" x="60" y="10" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-15" parent="0asuUWs828OCndWCZpTJ-13" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=26;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="5" vertex="1">
@@ -550,7 +543,7 @@
           <mxGeometry height="52.5" width="52.5" x="40" y="4.375" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-28" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="70" width="600" x="40" y="2190" as="geometry" />
+          <mxGeometry height="70" width="600" x="40" y="2213" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-29" parent="0asuUWs828OCndWCZpTJ-28" style="rounded=1;whiteSpace=wrap;html=1;fontSize=26;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="When is it enough" vertex="1">
           <mxGeometry height="43.75" width="540" x="60" y="8.75" as="geometry" />
@@ -585,10 +578,10 @@
         <mxCell id="0asuUWs828OCndWCZpTJ-52" parent="0asuUWs828OCndWCZpTJ-50" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=26;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="5.3" vertex="1">
           <mxGeometry height="52.5" width="52.5" x="40" y="4.375" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-53" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;ul&gt;&lt;li&gt;Multilateral methods take as input a large number of records and involve a lot of calculation. Notably:&lt;/li&gt;&lt;ul&gt;&lt;li&gt;GEKS family - multilayered bilaterals&lt;/li&gt;&lt;li&gt;TPD and TDH - large scale regression (typically with sparse matrices)&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;&lt;b&gt;Hard to analyze&lt;/b&gt; - Unlike traditional (bilateral) methods, not intuitive to understand and explain the drivers of price change&lt;/li&gt;&lt;li&gt;&lt;b&gt;Opaqueness introduces risk&amp;nbsp;&lt;/b&gt;- lack of understanding also implies it is hard to detect issues&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;NSOs must validate that everything operates effectively &amp;amp; be able to undersand (and explain) movements.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Goal of the project&lt;/b&gt;: Define and demonstrate representative analytical outputs and supporting diagnostics with open data to (1) lead to a concensus and (2) simplify adoption&lt;/div&gt;" vertex="1">
+        <mxCell id="0asuUWs828OCndWCZpTJ-53" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;ul&gt;&lt;li&gt;Multilateral methods take as input a large number of records and involve a lot of calculation. Notably:&lt;/li&gt;&lt;ul&gt;&lt;li&gt;GEKS family - multilayered bilaterals&lt;/li&gt;&lt;li&gt;TPD and TDH - large scale regression models (typically with sparse matrices)&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;&lt;b&gt;Hard to analyze&lt;/b&gt; - Unlike traditional (bilateral) methods, not intuitive to understand and explain the drivers of price change&lt;/li&gt;&lt;li&gt;&lt;b&gt;Opaqueness introduces risk&amp;nbsp;&lt;/b&gt;- lack of understanding also implies it is hard to detect issues&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;NSOs must validate that everything operates effectively &amp;amp; be able to understand (and explain) movements.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Goal of the project&lt;/b&gt;: Define and demonstrate representative analytical outputs and supporting diagnostics with open data to (1) lead to a concensus&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;and (2) simplify adoption&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="420" width="1530" x="70" y="450" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="Potential issues to look out for depend on the class of multilateral:&lt;div&gt;&lt;ul&gt;&lt;li&gt;TDH - estimated using product characteristics&amp;nbsp;&lt;/li&gt;&lt;li&gt;TPD/GEKS - uses appropriate product id (i.e. homogeneous product)&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Characteristics or products thus need to be consistently defined for the length of the window.&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Main risk: if coding of (1) characteristics or (2) product ids change within the window -&amp;gt; an incorrect movement will occur.&lt;/div&gt;" vertex="1">
+        <mxCell id="0asuUWs828OCndWCZpTJ-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="Potential issues to look out for depend on the class of multilateral:&lt;div&gt;&lt;ul&gt;&lt;li&gt;TDH - estimated using product characteristics&amp;nbsp;&lt;/li&gt;&lt;li&gt;TPD/GEKS - use appropriate product id (i.e. homogeneous product)&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Characteristics or products thus need to be consistently defined for the length of the window.&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Main risk: if coding of (1) characteristics or (2) product ids change within the window -&amp;gt; an incorrect movement will occur.&lt;/div&gt;" vertex="1">
           <mxGeometry height="360" width="840" x="1820" y="470" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-58" connectable="0" parent="1" style="group" value="" vertex="1">
@@ -600,14 +593,14 @@
         <mxCell id="0asuUWs828OCndWCZpTJ-60" parent="0asuUWs828OCndWCZpTJ-58" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=26;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="3.1" vertex="1">
           <mxGeometry height="52.5" width="52.5" x="40" y="4.375" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-61" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=26;" value="&lt;b&gt;Goal&lt;/b&gt;: Check that the data was received and is reasonable&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Examples:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Revenue by store / retailer&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Number of unique products (or row)&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Average unit value per unique product code&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Quantities and prices aligned to historic trends&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="0asuUWs828OCndWCZpTJ-61" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=26;" value="&lt;b&gt;Goal&lt;/b&gt;: Check that the data was received and is reasonable&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Examples:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Revenue by store / retailer&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Number of unique products (or rows)&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Average value per unique product code&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Quantities and prices aligned to historic trends&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="240" width="820" x="80" y="1050" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-62" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;div&gt;&lt;b&gt;Goal&lt;/b&gt;: Check that the data is structured approporiately for input to multilateral indices, and errors have been followed up.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Specifically:&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Churn in unique products (could be due to data issues, misclassification, or other coding/processing issues).&lt;/li&gt;&lt;li&gt;Missingness in product characteristics&lt;/li&gt;&lt;li&gt;Unit prices and quanitities lie within historic averages&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="320" width="800" x="80" y="1370" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-63" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;b&gt;Goal&lt;/b&gt;: Understand the quality adjusted price change &amp;amp; pick up on issues (whether with the data or the estimation process).&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Example analytical outputs:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Decompose into &#39;point effects&#39;&lt;/li&gt;&lt;li&gt;Combine with other characteristics (brand, type of produce, etc)&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Example output diagnostics:&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Validating products that contribute over an expected threshold.&amp;nbsp;&lt;/li&gt;&lt;li&gt;Compare movement for previous periods between this run and previous runs&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="410" width="800" x="80" y="1764" as="geometry" />
+        <mxCell id="0asuUWs828OCndWCZpTJ-63" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;b&gt;Goal&lt;/b&gt;: Understand the quality adjusted price change &amp;amp; pick up on issues (whether with the data or the estimation process).&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Example analytical outputs:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Decompose into &#39;points effects&#39;&lt;/li&gt;&lt;li&gt;&lt;span data-olk-copy-source=&quot;MessageBody&quot;&gt;Aggregate points effects for characteristics such as brand, type of product, etc&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Example output diagnostics:&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Validating products with contributions (i.e. points effects) over an expected threshold.&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Compare index movements for previous periods between this production run and previous runs&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="410" width="820" x="80" y="1740" as="geometry" />
         </mxCell>
         <mxCell id="0asuUWs828OCndWCZpTJ-65" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=26;" value="Current empirical example focuses on Dominick&#39;s dataset and GEKS calculation.&amp;nbsp;&lt;br&gt;&lt;br&gt;Next steps:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Expand to TPD and TDH methods&lt;/li&gt;&lt;li&gt;Expand to additional open datasets&lt;/li&gt;&lt;li&gt;Validate that dashboards generalize all use cases&lt;/li&gt;&lt;li&gt;Standardize code into a package (if of value)&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
           <mxGeometry height="290" width="810" x="1770" y="3520" as="geometry" />
@@ -627,8 +620,8 @@
         <mxCell id="Lz9mEM7FwzNVVMmmPr_B-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=25;fontFamily=Helvetica;" value="&lt;i&gt;Checkout the&amp;nbsp;&lt;/i&gt;&lt;i style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;project&amp;nbsp;&lt;/i&gt;&lt;i style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;site&lt;br&gt;(examples, paper, code, and more!)&lt;/i&gt;" vertex="1">
           <mxGeometry height="50" width="410" x="2260" y="280" as="geometry" />
         </mxCell>
-        <mxCell id="0asuUWs828OCndWCZpTJ-64" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=26;" value="It is important to note that an 80-20 rule is probably feasible. Not all possible scenarios can be forecasted, but common dashboards should answer most questions (or altert for further investigation).&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Structured (and well documented) data pipeline key to support analysts to investigate further as needed.&amp;nbsp;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="220" width="810" x="80" y="2270" as="geometry" />
+        <mxCell id="0asuUWs828OCndWCZpTJ-64" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=26;" value="&lt;span data-olk-copy-source=&quot;MessageBody&quot;&gt;In line with the &#39;80-20 principle&#39;, note that not &lt;/span&gt;all possible scenarios can be forecasted, but common dashboards should answer most questions (or alert for further investigation).&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Structured (and well documented) data pipeline key to support analysts to investigate further as needed.&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="220" width="810" x="80" y="2274" as="geometry" />
         </mxCell>
         <mxCell id="Lz9mEM7FwzNVVMmmPr_B-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=26;" value="&lt;ul&gt;&lt;li&gt;Step 3: Classification, outlier detection and aggregation by homogenous products (i.e. aggregation across time, geography, and products) is carried out.&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Output data supports main input diagnostics&lt;/div&gt;" vertex="1">
           <mxGeometry height="260" width="580" x="1560" y="2344" as="geometry" />
