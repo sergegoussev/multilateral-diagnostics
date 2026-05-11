@@ -1,7 +1,7 @@
 ---
 title: "1995-03 Dashboard"
 subtitle: "Monthly Dashboard for Beer sold at Dominick's: March 1995"
-draft: true
+draft: false
 format:
   html:
     toc: true
@@ -63,6 +63,9 @@ p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, 
 Similarly, contributions (multiplicative decomposition) compared to the product's relative (MoM)
 
 ```{r}
+#| echo: false
+#| warning: false
+
 p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(
     "NITEM:", product,
     "<br>Average share:", Avg_Share,
