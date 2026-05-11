@@ -35,6 +35,46 @@ datatable(bar_df, options = list(
 
 ## Analytical (output) diagnostics
 
+Contributions (multiplicative decomposition) compared to the product's average recent share (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+
+source("R/price_indices.R")
+
+products_and_contribution <- GEKS_contributions(category_name, period)
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, text = paste(
+    "NITEM:", product,
+    "<br>MoM relative:", Price_Ratio,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "Average Share")
+  
+  ggplotly(p, tooltip = "text")
+
+```
+
+Similarly, contributions (multiplicative decomposition) compared to the product's relative (MoM)
+
+```{r}
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(
+    "NITEM:", product,
+    "<br>Average share:", Avg_Share,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "MoM relative")
+  
+  ggplotly(p, tooltip = "text")
+```
+
 ## Input diagnostics
 
 ### Churn over time

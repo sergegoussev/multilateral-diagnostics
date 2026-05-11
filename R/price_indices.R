@@ -1,6 +1,7 @@
 library(gpindex)
 library(PriceIndices)
 library(remotes)
+library(lubridate)
 
 #' Function to return a spliced GEKS-T (i.e. CCDI)
 #' 
