@@ -21,6 +21,9 @@ dependencies:
   - r-arrow
   - r-DT
   - r-gpindex=0.6.3
+  - r-PriceIndices
+  - r-remotes
+  - git
 
   # Other tools
   - mamba
