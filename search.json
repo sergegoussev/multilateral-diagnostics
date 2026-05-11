@@ -25,7 +25,7 @@
     "href": "docs/examples/dashboards/dominicks-fsf-1992-07.html#analytical-output-diagnostics",
     "title": "1992-07 Dashboard",
     "section": "Analytical (output) diagnostics",
-    "text": "Analytical (output) diagnostics"
+    "text": "Analytical (output) diagnostics\nContributions (multiplicative decomposition) compared to the product’s average recent share (MoM)\n\n\n\n\n\n\nSimilarly, contributions (multiplicative decomposition) compared to the product’s relative (MoM)"
   },
   {
     "objectID": "docs/examples/dashboards/dominicks-fsf-1992-07.html#input-diagnostics",
@@ -53,7 +53,7 @@
     "href": "docs/examples/dashboards/dominicks-ber-1995-03.html#analytical-output-diagnostics",
     "title": "1995-03 Dashboard",
     "section": "Analytical (output) diagnostics",
-    "text": "Analytical (output) diagnostics\nContributions (multiplicative decomposition) compared to the product’s average recent share (MoM)\n\n\n\n\n\n\nSimilarly, contributions (multiplicative decomposition) compared to the product’s relative (MoM)\n\np &lt;- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(\n    \"NITEM:\", product,\n    \"&lt;br&gt;Average share:\", Avg_Share,\n    \"&lt;br&gt;Log contribution:\",log_contribution\n  ))) +\n    geom_point(alpha = 0.5, color = \"#3498db\") +\n    # geom_hline(yintercept = 1, linetype = \"dashed\", color = \"#392f2f\") +\n    theme_minimal() +\n    labs(x = \"log contribution\", y = \"MoM relative\")\n  \n  ggplotly(p, tooltip = \"text\")"
+    "text": "Analytical (output) diagnostics\nContributions (multiplicative decomposition) compared to the product’s average recent share (MoM)\n\n\n\n\n\n\nSimilarly, contributions (multiplicative decomposition) compared to the product’s relative (MoM)"
   },
   {
     "objectID": "docs/examples/dashboards/dominicks-ber-1995-03.html#input-diagnostics",
