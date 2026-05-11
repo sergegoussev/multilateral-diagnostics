@@ -241,9 +241,11 @@ plot_item_price_relatives <- function(ratio_data) {
     "<br>Price Curr:", Price_Curr
   ))) +
     geom_point(alpha = 0.5, color = "#3498db") +
-    geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
     theme_minimal() +
     labs(x = "Average Expenditure Share", y = "Price Ratio")
   
   return(ggplotly(p, tooltip = "text"))
 }
+
+

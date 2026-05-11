@@ -31,17 +31,55 @@ datatable(bar_df, options = list(
 ))
 ```
 
-
 # Diagnostics
 
 ## Analytical (output) diagnostics
 
+Contributions (multiplicative decomposition) compared to the product's average recent share (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+
+source("R/price_indices.R")
+
+products_and_contribution <- GEKS_contributions(category_name, period)
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, text = paste(
+    "NITEM:", product,
+    "<br>MoM relative:", Price_Ratio,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "Average Share")
+  
+  ggplotly(p, tooltip = "text")
+
+```
+
+Similarly, contributions (multiplicative decomposition) compared to the product's relative (MoM)
+
+```{r}
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(
+    "NITEM:", product,
+    "<br>Average share:", Avg_Share,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "MoM relative")
+  
+  ggplotly(p, tooltip = "text")
+```
 
 ## Input diagnostics
 
 ### Churn over time
 
-Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previuous period) and products leaveing the sample (i.e. not seen this month).
+Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previous period) and products leaving the sample (i.e. not seen this month).
 
 ```{r}
 #| echo: false
@@ -54,6 +92,7 @@ data_up_to_period <- ird %>%
 
 plot_product_churn(data_up_to_period)
 ```
+
 ### Item-level price relatives
 
 ```{r}
@@ -63,7 +102,7 @@ plot_product_churn(data_up_to_period)
 unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
 ```
 
-::: panel-tabset  
+::: panel-tabset
 ## Plot of price change by share
 
 ```{r}
@@ -81,11 +120,9 @@ plot_item_price_relatives(unit_price_changes)
 
 datatable(unit_price_changes)
 ```
-
 :::
 
 ## Monitoring / data validation
-
 
 The following weeks' data was used a input for the last month.
 
@@ -129,6 +166,7 @@ datatable(
 ```
 
 ### Week by week breakdown
+
 ```{r}
 #| echo: false
 #| warning: false
