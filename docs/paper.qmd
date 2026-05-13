@@ -28,6 +28,10 @@ format:
     toc: false
     number-sections: true
     colorlinks: true
+    include-before-body:
+      - text: |
+          \centerline{\textbf{WORKING PAPER}}
+          \vspace{1cm}
 
   # for temporary editing
   docx:
@@ -63,9 +67,58 @@ Diagnostics can be categorized into three types
 2.  **Input diagnostics**: check that the data as structured for input to the multilateral estimation process looks sensible, and that, at this level of aggregation, any errors that are identifiable by outliers have been followed up.
 3.  **Analytical and output diagnostics**: are possible once the indexes have been calculated. Analytical diagnostics are about understanding the quality-adjusted price change using decomposition measures, and output diagnostics are about picking up problems, either with the data or the estimation process itself, that can be identified by comparison of the index to previous production runs and identification of unusual or significant movements in the index.
 
+![Overall data flow](/docs/images/data-flow-general.png){#fig-overall-data-flow}
+
 These diagnostics are aligned with the value adding process within the processing pipeline common to NSOs. Specifically, data gets increasingly processed and the further it goes from initial reception to elementary price indices, which is where multilateral indices are integrated with other data sources into an Elementary Aggregate [@ons2025introducing]. In production, NSOs will generally start by evaluating the overall Elementary Aggregate and the sub-indices that contributed to it, and then the analytical and output diagnostics of a specific elementary price index, then proceed backwards towards monitoring diagnostics to answer various questions of the data each month. Each stage thus has to clearly connect and show when it is appropriate to go back one more step. @fig-overall-data-flow showcases the overall flow of data from initial ingestion to elementary price index (typically just before integration with other data). Specifically, raw data is first received prior to its ingestion, classification and other processing to create homogeneous products, which are then aggregated via the selected multilateral method.
 
-![Overall data flow](/docs/images/data-flow-general.png){#fig-overall-data-flow}
+## Monitoring/Validation
+
+The first set of diagnostics are those basic checks that should be performed to ensure that the data received is complete and correct. This has been defined as early as by @guthmundsdottirs2016, with the UN e-handbook providing a useful summary in the Monitoring, validation section. This paper builds on this to conceptualize the following key aspects:
+
+-   Checking the data was received and is in the right format with the required variables.
+-   If the data is received disaggregated by store, checking that all stores are either represented or their churn understood and verified, and any store-level classification changes understood and verified.
+-   Checking that descriptive measures within retailer/store against historical benchmarks. For instance:
+    1.  Total revenue by retailer/store are within certain range limits
+    2.  Number of article codes (and for a specified sample, checks that sample selection is correct)
+    3.  Unit value prices per article code, between consecutive periods, lie within an acceptable range of variation
+    4.  Time series of monthly quantities and prices to evaluate data consistency and the appearance of outliers
+
+Note that if data is received more frequently than the production schedule dictates, this is an opportunity to identify and follow-up any surfaced issues early.
+
+## Input diagnostics
+
+The input diagnostics are those that investigate the data once it’s been processed into the correct format for the index estimation process. For example, the raw data might be at the level of individual transactions, or the aggregation might be at a more disaggregated level (e.g. weeks) than the production index (e.g. months). There may also be filtering out of data that is outside the target coverage of e.g. region or product level. Once at this stage, basic descriptive statistics similar to those of the validation/monitoring stage should be redone unless the transformation from raw to processed data is trivial. That is, measures to check descriptive measures within retailer/store against historical benchmarks (of the corresponding historical processed data):
+
+1.  Total revenue by retailer/store are within certain range limits
+2.  Number of article codes (and for a specified sample, checks that sample selection is correct)
+3.  Unit value prices per index-aggregation,[^1] between consecutive periods, lie within an acceptable range of variation
+4.  Time series of monthly quantities and prices per index-aggregation\* to evaluate data consistency and the appearance of outliers
+
+[^1]: Note that, at this stage, aggregate statistics like (raw) average are usefully calculated at the level of the index itself, and any relevant sub-indexes. Unit prices at the article level have already been investigated in the monitoring/validation stage.
+
+There may be outliers that emerge at this stage that weren’t identified at the monitoring/validation step. Furthermore, diagnostics at this stage are to a large part around product churn. Specifically, are the levels of churn (products/articles leaving and arriving) in line with historical trends and variation? Indeed this is the stage where issues that might be caused by coding changes in the input data, particularly with the coding of characteristics if those are used in the estimation, can be picked up on. For instance @stansfield2022map showcase where an issue with data coding could lead to breaks in product identifiers in the case of consumer electronics (where the product identifier is defined in terms of the values of characteristics), which can be identified by analyzing the churn to identify discontinuities.
+
+## Analytical/Output diagnostics
+
+The third class of measures and diagnostics are those that can be undertaken once the indexes have been estimated. These enable us to use the estimated indexes themselves to both identify any previously-unidentified issues with the data, or failures with the index estimation itself (output diagnostics) and also to understand the price changes (analytical measures).
+
+### Output diagnostics
+
+Decomposition of the indexes to the article level can be used to identify any previously unidentified errors in the data. Ranking the contribution of each article/product and flagging for investigation if they are over some threshold value is an effective way to approach this. In most cases we would expect not to pick up data errors by this stage, but it another valuable opportunity. As multilateral indexes use an estimation window of historical data, we have the ability to directly compare the movements in the overlapping window of the current and previous production runs. While it is legitimate for the movements to change slightly with updated data, there shouldn’t be any major differences. Confirming this is an important part of verifying that the estimation has completed correctly.
+
+## Analytical measures
+
+Multilateral methods on alternative prices data, such as scanner or administrative data, are very powerful but by the nature of the size of the data and the complexity of the algorithms, it can be difficult if not impossible, to understand what’s going on ‘under the hood’. Analytical measures are about understanding and verifying the overall movement, particularly if the movement is unusual. Furthermore, this step is doubly critical if the multilateral method is quality adjusted (i.e. if a TDH is used), as understanding the pure price change and the compositional change that showcases a shift in quality of the group of products.
+
+This is where decomposition—i.e. ‘point effects’—methods are required and, depending on the multilateral method, there are different approaches and methods that can be used for decomposition. These can range from brute-force (iterative rerunning of the index excluding one product or product-group at a time) to analytical (exact formulae derived from the index method itself). Decomposition measures for analytical use are most likely to be useful when performed at the sub-index level—for example brand of computer, or type of produce, rather than at the individual article/product/barcode level.
+
+# Knowing when to stop
+
+It is infeasible to define the comprehensive set of diagnostics and outputs necessary to operationalize for several reasons. On the one hand, there should be a set that will help explain most of the fluctuations in a production flow, hence designing an optimal set of dashboards is appropriate. In other words, a 80-20 rule can be applied on building a number of outputs that help explain most movements. On the other hand, it is likely that edge cases will emerge that require further investigation—requiring a clean way to query various granularities of the data for one-off analysis. As such, it is critical to design the main dashboards and diagnostics on top of a well documented and clear data flow, allowing easy analysis.
+
+# Empirical examples
+
+# Conclusion
 
 # References {.unnumbered}
 
