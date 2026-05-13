@@ -1,19 +1,17 @@
 ---
 title: "Putting windows in the black box: Developing a set of diagnostic and analytical tools to support multilateral price indexes in production"
+description: "Working Paper"
 bibliography: references.bib
 subtitle: |
   Presented at the *19th Ottawa Group meeting*
   *Poland, May 13-15, 2026*
 authors:
-    - name: Serge Goussev 
-      affiliation: Statistics Canada
-      email: serge.goussev@statcan.gc.ca
+    - name: Serge Goussev
+      email: goussev.serge@gmail.com
       orcid: 0009-0008-2359-5322
     - name: Frances Krsinich
 abstract: |  
-  Using alternative data as a source in lower level aggregation considerably complicates the task of understanding and explaining price movements within the overall CPI. This is made even harder when the NSO applies multilateral price index methods, as data from multiple time periods is leveraged to measure price change, expanding the amount of data points and trends that must be considered. Specifically, alongside the overall price measure that could process the data as a ‘black box’, National Statistical Organizations (NSOs) need to also identify any issues with the input data that may impact the measurement (input diagnostics) and also explain the calculated index (output analytics). 
-
-  This research develops and tests a set of sensible default analytic and diagnostic outputs that should play a key operational role. Specifically, it builds on earlier work on data quality testing [@guthmundsdottirs2016] and on foundational work in decomposition of both bilateral [@balk2008price] and multilateral methods [@webster2019decomposing] to outline a comprehensive set of analytical and diagnostic requirements. Dashboards to operationalize these requirements are then demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.
+  Using alternative data as a source in lower level aggregation considerably complicates the task of understanding and explaining price movements within the overall CPI. This is made even harder when the NSO applies multilateral price index methods, as data from multiple time periods is leveraged to measure price change, expanding the amount of data points and trends that must be considered. Specifically, alongside the overall price measure that could process the data as a ‘black box’, National Statistical Organizations (NSOs) need to also identify any issues with the input data that may impact the measurement (input diagnostics) and also explain the calculated index (output analytics. This research develops, tests, and demonstrates in an open and reproducible manner a set of diagnostic and analytical outputs that could be used alongside multilateral methods. The paper thus contributues to operational considration necessary in the adoption of these methods -- ensuring that these methods can be better understood prior to adoption and their adoption supports the NSO in understanding why price movements occur as they do.
 citation:
   type: paper-conference
   container-title: "Presented at the 19th Ottawa Group meeting, Warsaw, Poland"
@@ -21,15 +19,21 @@ citation:
   url: https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html
 google-scholar: true  
 format:
-  # pdf:
-  #   documentclass: article
-  #   papersize: letter
-  #   geometry:
-  #     - a4paper
-  #     - margin=1in
-  #   toc: false
-  #   number-sections: true
-  #   colorlinks: true
+  pdf:
+    documentclass: article
+    papersize: letter
+    geometry:
+      - a4paper
+      - margin=1in
+    toc: false
+    number-sections: true
+    colorlinks: true
+
+  # for temporary editing
+  docx:
+    toc: true
+    toc-title: Contents
+    number-sections: true
 
   html:
     toc: true
@@ -37,6 +41,29 @@ format:
     body-width: 1200px 
 ---
 
+# Introduction
+
+National Statistical Organizations (NSOs) are increasingly using alternative sources of data, such as scanner or administrative sources, to measure price change. These data sources are high-frequency and volatile with high churn, as such, require multilateral indices to measure properly. Much of the attention so far has been on the multilateral methods themselves and how to select and operationalize the most appropriate method to measure overall average price change. Effort is increasingly placed on breaking down and understanding the overall trend to its sub-components, such as measuring shrinkflation, cheapflation, and related ways to understand the dispersion of price change [@crescenzi2026cheapflation, @kristiansen2026assessing]. These trends are not
+
+There are different multilateral methods, the most common being RGEKS, GK, hedonic and TPD-based methods. They all share the fact that they use a lot of data and involve lots of calculation, whether by multilayered bilateral index calculations (the GEKS-methods) or large-scale regression models on sparse matrices (the TPD or hedonic methods). Unlike traditional index estimation, where it is relatively straightforward to explain the drivers of price movements at different levels of the price index hierarchy, the estimation tends to feel like a ‘black box’. This level of opaqueness is not acceptable as is, as some of the methods can be sensitive to specific data issues that need to be caught and handled [@fox2026curious], as well as due to the requirement to understand the movements in production.
+
+This research develops and tests a set of sensible default diagnostic outputs that should play a key role in supporting both analytical and operational needs. Specifically, it grounds diagnostic and analytical outputs to the data processing pipeline, from early stages that focus on data quality testing [@guthmundsdottirs2016] to decomposition of multilateral methods [@webster2019decomposing], defining the overall price index method requirements to keep an eye on and overall conceptual aspects to keep in mind. Dashboards to operationalize applicable diagnostic and analytical outputs are demonstrated using open benchmark datasets to support peer review and simplify adoption. The project thus outlines in an open and reproducible fashion an approach that can help NSOs easily understand and adopt analytical and diagnostic measures that would help them adopt multilateral methods in production and for various research purposes. Developing such robust measures ensures that the NSO validates that everything is operating as it should and enables it to understand and explain the sources of inflation to support the dissemination process.
+
+# Price indices formulas and their requirements
+
+The three classes of multilateral methods typically adopted and the focus of this research are the Time Dummy Hedonic, the GEKS family, and the Time Product Dummy. The TDH is estimated using characteristics of the products in a regression, while the GEKS and TPD use the product id. While all three of these methods appropriately deal with legitimate product churn (i.e. products entering and leaving the market) and missing prices (periods where the product isn’t sold), potential for inconsistencies in the data over time can lead to breaks in the longitudinal record which will affect the indexes, sometimes significantly.
+
+As all three use a window of time (i.e. multiple periods, hence ‘multilateral’) it is important that the characteristics (for TDH) of the product ids (for GEKS and TPD) are consistently defined with the length of the estimation window. In practice, with alternative prices data such as scanner, online or administrative data, the coding of characteristics or product ids can change over time. If this isn’t identified and the characteristics or product ids made consistent, it will lead to incorrect movements in the index. Therefore, it is important to have diagnostics to identify if this could be happening.
+
+# Defining diagnostics
+
+Diagnostics can be categorized into three types
+
+1.  **Monitoring and Validation diagnostics**: check that the data has been received and looks reasonable, with reference to previous data
+2.  **Input diagnostics**: check that the data as structured for input to the multilateral estimation process looks sensible, and that, at this level of aggregation, any errors that are identifiable by outliers have been followed up.
+3.  **Analytical and output diagnostics**: are possible once the indexes have been calculated. Analytical diagnostics are about understanding the quality-adjusted price change using decomposition measures, and output diagnostics are about picking up problems, either with the data or the estimation process itself, that can be identified by comparison of the index to previous production runs and identification of unusual or significant movements in the index.
+
+These diagnostics are aligned with the value adding process within the processing pipeline common to NSOs. Specifically, data gets increasingly processed and the further it goes from initial reception to elementary price indices, which is where multilateral indices are integrated with other data sources into an Elementary Aggregate [@ons2025introducing]. In production, NSOs will generally start by evaluating the overall Elementary Aggregate and the sub-indices that contributed to it, and then the analytical and output diagnostics of a specific elementary price index, then proceed backwards towards monitoring diagnostics to answer various questions of the data each month. Each stage thus has to clearly connect and show when it is appropriate to go back one more step. @fig-overall-data-flow showcases the overall flow of data from initial ingestion to elementary price index (typically just before integration with other data). Specifically, raw data is first received prior to its ingestion, classification and other processing to create homogeneous products, which are then aggregated via the selected multilateral method.
 
 ![Overall data flow](/docs/images/data-flow-general.png){#fig-overall-data-flow}
 
@@ -44,5 +71,3 @@ format:
 
 ::: {#refs}
 :::
-
-
