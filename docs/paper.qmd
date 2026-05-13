@@ -123,11 +123,7 @@ The following section demonstrates and explains example diagnostics for a specif
 [^2]: See the [examples, such as the Dominick's example](https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/dominicks.html). The overview page shows the categories analyzed, with a number of "Monthly dashboards" listed to showcase how the category could be analyzed for that month.
 
 ```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show the code"
-#| out-width: "100%"
-#| out-height: "100%"
+#| echo: false
 #| warning: false
 #| label: fig-fsf-ccdi-example
 #| fig-cap: "Fabric Softeners GEKS-T example"
