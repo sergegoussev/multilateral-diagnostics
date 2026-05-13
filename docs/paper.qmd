@@ -118,6 +118,70 @@ It is infeasible to define the comprehensive set of diagnostics and outputs nece
 
 # Empirical examples
 
+The following section demonstrates and explains example diagnostics for a specific category in Dominick's Finer foods dataset [@dominicksmanual]. Further examples are available on the project site.[^2] @fig-fsf-ccdi-example shows the application of GEKS-T to the Fabric Softener dataset. A specific period of price change is then chosen for further analysis.
+
+[^2]: See the [examples, such as the Dominick's example](https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/dominicks.html). The overview page shows the categories analyzed, with a number of "Monthly dashboards" listed to showcase how the category could be analyzed for that month.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the code"
+#| out-width: "100%"
+#| out-height: "100%"
+#| warning: false
+#| label: fig-fsf-ccdi-example
+#| fig-cap: "Fabric Softeners GEKS-T example"
+
+# Load your functions
+source("R/dominicks_utils.R")
+source("R/price_indices.R")
+
+library(plotly)
+library(DT)
+
+ird <- read_parquet("data/clean/ird_fsf_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet")
+
+ccdi <- spliced_CCDI(ird)
+ccdi_df <- data.frame(
+  period = names(ccdi),
+  score = as.numeric(ccdi)
+)
+
+write_parquet(ccdi_df, "output/fsf_ccdi.parquet")
+
+
+fig <- plot_ly(ccdi_df, 
+               x = ~period, 
+               y = ~score, 
+               type = 'scatter', 
+               mode = 'lines',
+               text = ~paste("Period:", period, "<br>Index:", score),
+               hoverinfo = 'text') %>%
+  layout(title = "CCDI with mean splice (Fabric Softeners category)",
+         xaxis = list(title = "Time Period", type = 'category'), # Ensures order is maintained
+         yaxis = list(title = "Index", tickformat = ".01"),
+         shapes = list(
+           list(
+             type = "line",
+             x0 = "1992-07",
+             x1 = "1992-07",
+             y0 = 0,
+             y1 = 1,
+             yref = "paper",
+             line = list(color = "red", width = 2)
+           )
+         ))
+ fig
+```
+
+## Overview of price change this month
+
+## Analytical (output) diagnostics
+
+## Input diagnostics
+
+## Monitoring / Validation diagnostics
+
 # Conclusion
 
 # References {.unnumbered}
