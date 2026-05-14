@@ -50,7 +50,7 @@ format:
 
 # Introduction
 
-National Statistical Organizations (NSOs) are increasingly using alternative sources of data, such as scanner or administrative sources, to measure price change. These data sources are high-frequency and volatile with high churn and, as such, require multilateral indices to measure properly. Much of the attention so far has been on the multilateral methods themselves and how to select and operationalize the most appropriate method to measure overall average price change. Effort is increasingly placed on breaking down and understanding the overall price movement down to its sub-components level, such as measuring shrinkflation, cheapflation, and related ways to understand the dispersion of price change [@crescenzi2026cheapflation, @kristiansen2026assessing]. 
+National Statistical Organizations (NSOs) are increasingly using alternative sources of data, such as scanner or administrative sources, to measure price change. These data sources are high-frequency and volatile with high churn and, as such, require multilateral indices to measure properly. Much of the attention so far has been on the multilateral methods themselves and how to select and operationalize the most appropriate method to measure overall average price change. Effort is increasingly placed on breaking down and understanding the overall price movement down to its sub-components level, such as measuring shrinkflation, cheapflation, and related ways to understand the dispersion of price change [@crescenzi2026cheapflation, @kristiansen2026assessing].
 
 There are different multilateral methods, the most common being RGEKS, GK, hedonic and TPD-based methods. They all share the fact that they use a lot of data and involve lots of calculation, whether by multilayered bilateral index calculations (the GEKS methods) or large-scale regression models on sparse matrices (the TPD or hedonic methods). Unlike traditional index estimation, where it is relatively straightforward to explain the drivers of price movements at different levels of the price index hierarchy, the estimation tends to feel like a ‘black box’. This level of opaqueness is not acceptable as is, as some of the methods can be sensitive to specific data issues that need to be caught and handled [@fox2026curious], as well as due to the requirement to understand the movements in production.
 
@@ -121,7 +121,7 @@ It is infeasible to define the comprehensive set of diagnostics and outputs nece
 
 # Empirical examples
 
-The following section demonstrates and explains example diagnostics for a specific category in Dominick's Finer foods dataset [@dominiks_dataset]. Further examples are available on the project site.[^2] @fig-fsf-ccdi-example shows the application of GEKS-T to the Fabric Softener dataset. A specific period of price change is then chosen for further analysis.
+The following section demonstrates and explains an initial set of example diagnostics for a specific category in Dominick's Finer foods dataset [@dominiks_dataset]. Further examples are available on the project site.[^2] @fig-fsf-ccdi-example shows the application of GEKS-T based on a 25 month window and mean splice to the Fabric Softener dataset. A specific period of price change is then chosen for further analysis.
 
 [^2]: See the [examples, such as the Dominick's example](https://sergegoussev.github.io/multilateral-diagnostics/docs/examples/dominicks.html). The overview page shows the categories analyzed, with a number of "Monthly dashboards" listed to showcase how the category could be analyzed for that month.
 
@@ -173,15 +173,151 @@ fig <- plot_ly(ccdi_df,
  fig
 ```
 
-## Overview of price change this month
+## Monitoring / Validation diagnostics
 
-## Analytical (output) diagnostics
+### Overview of the weekly data
+
+The following weeks' data was used a input for the last month.
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-weeks-in-month
+#| fig-cap: "Weeks within the month"
+
+results <- monitoring_stats(period, category_name)
+
+results$period_data <- results$period_data[, c(
+  "WEEK", 
+  "week_start", 
+  "week_end", 
+  "distinct_upcs",
+  "distinct_nitems",
+  "total_sales",
+  "number_of_rows",
+  "distinct_stores",
+  "distinct_com_codes",
+  "distinct_zones",
+  "ref_period")]
+
+datatable(
+      results$period_data,
+      extensions = 'Buttons', # For the colvis button
+      options = list(
+        # 'B' adds buttons, 't' is the table
+        dom = 'Bt', 
+        buttons = c('colvis'),
+        columnDefs = list(
+          list(
+            visible = FALSE,      # Hide columns by default
+            targets = c(4, 8, 9, 10, 11)     # Hide a few to simplify UI
+          )
+        ),
+        # Force table to occupy full container width
+        autoWidth = TRUE,
+        width = '100%'
+      )
+    )
+```
+
+### Week by week breakdown
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-week-by-week-breakdown
+#| fig-cap: "Week by week breakdown---key statistics of the weekly datasets used for the reference period."
+
+library(plotly)
+library(htmltools)
+
+widgets <- plot_weekly_stats(results$period_data, results$weekly_stats)
+widgets
+```
 
 ## Input diagnostics
 
-## Monitoring / Validation diagnostics
+Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previous period) and products leaving the sample (i.e. not seen this month).
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-product-churn
+#| fig-cap: "Product Churn over time to contextualize churn this month"
+
+ird <- read_parquet(glue("data/clean/ird_{category_name}_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet"))
+
+data_up_to_period <- ird %>%
+      filter(REF_PERIOD <= period)
+
+plot_product_churn(data_up_to_period)
+```
+
+Plot of price change by share
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-unit-price-change
+#| fig-cap: "Change in unit prices"
+
+unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
+
+plot_item_price_relatives(unit_price_changes)
+```
+
+## Analytical (output) diagnostics
+
+Contributions (multiplicative decomposition) compared to the product's average recent share (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-contributions-compared-to-share
+#| fig-cap: "Product contribution compared to the average share (of the last 2 months) of the product"
+
+source("R/price_indices.R")
+
+products_and_contribution <- GEKS_contributions(category_name, period)
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, text = paste(
+    "NITEM:", product,
+    "<br>MoM relative:", Price_Ratio,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "Average Share")
+  
+  ggplotly(p, tooltip = "text")
+
+```
+
+Similarly, contributions (multiplicative decomposition) compared to the product's relative (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-contributions-compared-to-price-change
+#| fig-cap: "Product contribution compared to the price change (over the last 2 months) of the product"
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(
+    "NITEM:", product,
+    "<br>Average share:", Avg_Share,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "MoM relative")
+  
+  ggplotly(p, tooltip = "text")
+```
 
 # Conclusion
+
+This paper presented an initial set of diagnostics and analytical outputs that are of value to consider when calculating a multilateral price index. The research focused on conceptualizing the overall flow of data that enables the three types of diagnostics, as well as a set of example dashboards to showcase how these diagnostics and analytical outputs would look for a specific month with open data. Further work is planned to expand this initial set of work. Firstly, expansion to other types of multilateral methods is in order as analytical outputs will vary by method. Secondly, additional open datasets will be trialed to both enable a more more robust assessment of quality change within the period, which is less prevalent in the initial dataset used, as well as to cross-validate the diagnostics to a wider set of challenges. Thirdly, the diagnostics and analytical outputs themselves will be tuned to ensure that they capture all intended use cases. Finally, if of value, the code to operationalize the dashboards can be standardized into a package to enable NSOs to easily adopt the process for analytical or production purposes.
 
 # References {.unnumbered}
 
