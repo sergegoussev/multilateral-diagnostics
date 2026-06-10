@@ -22,25 +22,25 @@ citation:
   url: https://sergegoussev.github.io/multilateral-diagnostics/docs/paper.html
 google-scholar: true  
 format:
-  pdf:
-    documentclass: article
-    papersize: letter
-    geometry:
-      - a4paper
-      - margin=1in
-    toc: false
-    number-sections: true
-    colorlinks: true
-    include-before-body:
-      - text: |
-          \centerline{\textbf{WORKING PAPER}}
-          \vspace{1cm}
-
+  # pdf:
+  #   documentclass: article
+  #   papersize: letter
+  #   geometry:
+  #     - a4paper
+  #     - margin=1in
+  #   toc: false
+  #   number-sections: true
+  #   colorlinks: true
+  #   fig-pos: 'H'
+  #   include-before-body:
+  #     - text: |
+  #         \centerline{\textbf{WORKING PAPER}}
+  #         \vspace{1cm}
   # for temporary editing
-  docx:
-    toc: true
-    toc-title: Contents
-    number-sections: true
+  # docx:
+  #   toc: true
+  #   toc-title: Contents
+  #   number-sections: true
 
   html:
     toc: true
@@ -131,6 +131,11 @@ The following section demonstrates and explains an initial set of example diagno
 #| label: fig-fsf-ccdi-example
 #| fig-cap: "Fabric Softeners GEKS-T example"
 
+period <- "1992-07"
+category_name <- "fsf"
+
+source("R/diagnostics.R")
+
 # Load your functions
 source("R/dominicks_utils.R")
 source("R/price_indices.R")
@@ -170,7 +175,7 @@ fig <- plot_ly(ccdi_df,
              line = list(color = "red", width = 2)
            )
          ))
- fig
+print(fig)
 ```
 
 ## Monitoring / Validation diagnostics
@@ -232,7 +237,7 @@ library(plotly)
 library(htmltools)
 
 widgets <- plot_weekly_stats(results$period_data, results$weekly_stats)
-widgets
+print(widgets)
 ```
 
 ## Input diagnostics
@@ -250,7 +255,7 @@ ird <- read_parquet(glue("data/clean/ird_{category_name}_timesamp_NULL_groupby_N
 data_up_to_period <- ird %>%
       filter(REF_PERIOD <= period)
 
-plot_product_churn(data_up_to_period)
+print(plot_product_churn(data_up_to_period))
 ```
 
 Plot of price change by share
@@ -263,7 +268,7 @@ Plot of price change by share
 
 unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
 
-plot_item_price_relatives(unit_price_changes)
+print(plot_item_price_relatives(unit_price_changes))
 ```
 
 ## Analytical (output) diagnostics
@@ -290,7 +295,7 @@ p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, 
     theme_minimal() +
     labs(x = "log contribution", y = "Average Share")
   
-  ggplotly(p, tooltip = "text")
+print(ggplotly(p, tooltip = "text"))
 
 ```
 
@@ -312,7 +317,7 @@ p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio
     theme_minimal() +
     labs(x = "log contribution", y = "MoM relative")
   
-  ggplotly(p, tooltip = "text")
+print(ggplotly(p, tooltip = "text"))
 ```
 
 # Conclusion
