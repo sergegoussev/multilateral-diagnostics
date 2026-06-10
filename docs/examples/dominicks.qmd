@@ -31,7 +31,7 @@ format:
 
 Dominick's is a rich and very useful dataset to that can act as a representative scanner example. Since it was first proposed by @mehrhoff2018promoting, it has been widely used within price statistics, from analysis of multilateral methods by @lamboray2021index to empirical tests for the decomposition of multilateral methods by @webster2019decomposing. We leverage this dataset as it provides a very realistic example that NSOs would need to work with.
 
-The dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website (@dominicksmanual).[^1] This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data.
+The dataset comes pre-categorized in separate product and movement files on the Chicago Booth School website (@dominiks_dataset).[^1] This makes it simple to work with as we can assume that the category represents the elementary index prior to its integration into the CPI with other retailer dataset and field data.
 
 [^1]: See [catalogue record](https://un-task-team-for-scanner-data.github.io/price-stats-data-catalogue/dominiks.html) in the Price Statistics Open Data catalogue for more information about the dataset.
 
