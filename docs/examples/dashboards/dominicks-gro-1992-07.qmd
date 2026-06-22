@@ -1,0 +1,185 @@
+---
+title: "Grooming Products Dashboard"
+subtitle: "Deep dive of Grooming Products sold at Dominick's to cover the data issue raised by Kevin Fox"
+draft: false
+format:
+  html:
+    toc: true
+    toc-expand: 3
+
+categories:
+  - Dominicks
+  - Grooming Products
+  - GEKS
+---
+
+# Overview
+
+At the 2026 Ottawa Group confernece in Warsaw Poland, [Kevin Fox outlined a case](https://ottawagroup2026.stat.gov.pl/en/DownloadFile?nrSesji=2&nrWystapienia=1&nrPliku=2) where data issues could make a multilateral index (a GEKS) 'blow up'. To replicate this case as an experiment to see if diagnostics could catch the issue, we take a look at the whole category and trial dashboards at several instances.
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| 
+period <- "1992-07"
+category_name <- "fsf"
+
+source("R/diagnostics.R")
+
+bar_df <- overview_table(period, category_name)
+
+datatable(bar_df, options = list(
+  dom = 't' # i.e. Table only
+))
+```
+
+# Diagnostics
+
+## Analytical (output) diagnostics
+
+Contributions (multiplicative decomposition) compared to the product's average recent share (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+
+source("R/price_indices.R")
+
+products_and_contribution <- GEKS_contributions(category_name, period)
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Avg_Share, text = paste(
+    "NITEM:", product,
+    "<br>MoM relative:", Price_Ratio,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "Average Share")
+  
+  ggplotly(p, tooltip = "text")
+
+```
+
+Similarly, contributions (multiplicative decomposition) compared to the product's relative (MoM)
+
+```{r}
+#| echo: false
+#| warning: false
+
+p <- ggplot(products_and_contribution, aes(x = log_contribution, y = Price_Ratio, text = paste(
+    "NITEM:", product,
+    "<br>Average share:", Avg_Share,
+    "<br>Log contribution:",log_contribution
+  ))) +
+    geom_point(alpha = 0.5, color = "#3498db") +
+    # geom_hline(yintercept = 1, linetype = "dashed", color = "#392f2f") +
+    theme_minimal() +
+    labs(x = "log contribution", y = "MoM relative")
+  
+  ggplotly(p, tooltip = "text")
+```
+
+## Input diagnostics
+
+### Churn over time
+
+Churn over time - plotting products (`NITEM`) entering the sample, products staying (compared to the previous period) and products leaving the sample (i.e. not seen this month).
+
+```{r}
+#| echo: false
+#| warning: false
+
+ird <- read_parquet(glue("data/clean/ird_{category_name}_timesamp_NULL_groupby_NITEM-REF_PERIOD.parquet"))
+
+data_up_to_period <- ird %>%
+      filter(REF_PERIOD <= period)
+
+plot_product_churn(data_up_to_period)
+```
+
+### Item-level price relatives
+
+```{r}
+#| echo: false
+#| warning: false
+
+unit_price_changes <- item_price_ratio_table(data_up_to_period, period)
+```
+
+::: panel-tabset
+## Plot of price change by share
+
+```{r}
+#| echo: false
+#| warning: false
+
+plot_item_price_relatives(unit_price_changes)
+```
+
+## Raw data
+
+```{r}
+#| echo: false
+#| warning: false
+
+datatable(unit_price_changes)
+```
+:::
+
+## Monitoring / data validation
+
+The following weeks' data was used a input for the last month.
+
+```{r}
+#| echo: false
+#| warning: false
+
+results <- monitoring_stats(period, category_name)
+
+results$period_data <- results$period_data[, c(
+  "WEEK", 
+  "week_start", 
+  "week_end", 
+  "distinct_upcs",
+  "distinct_nitems",
+  "total_sales",
+  "number_of_rows",
+  "distinct_stores",
+  "distinct_com_codes",
+  "distinct_zones",
+  "ref_period")]
+
+datatable(
+      results$period_data,
+      extensions = 'Buttons', # For the colvis button
+      options = list(
+        # 'B' adds buttons, 't' is the table
+        dom = 'Bt', 
+        buttons = c('colvis'),
+        columnDefs = list(
+          list(
+            visible = FALSE,      # Hide columns by default
+            targets = c(4, 8, 9, 10, 11)     # Hide a few to simplify UI
+          )
+        ),
+        # Force table to occupy full container width
+        autoWidth = TRUE,
+        width = '100%'
+      )
+    )
+```
+
+### Week by week breakdown
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(plotly)
+library(htmltools)
+
+widgets <- plot_weekly_stats(results$period_data, results$weekly_stats)
+widgets
+```
